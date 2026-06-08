@@ -32,6 +32,8 @@
         ::-webkit-scrollbar { width:4px; } ::-webkit-scrollbar-track { background:#0F0F0F; } ::-webkit-scrollbar-thumb { background:#D4A843; border-radius:2px; }
             #drawer .nav-link{font-size:1.1rem;}
         #carousel{scrollbar-width:none;} #carousel::-webkit-scrollbar{display:none;}
+        .dot{width:8px;height:8px;border-radius:9999px;background:rgba(255,255,255,.35);transition:all .25s;}
+        .dot.active{width:22px;background:#D4A843;}
     </style>
 </head>
 <body class="text-white">
@@ -113,6 +115,14 @@
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
                 </button>
             </div>
+            <div id="cDots" class="flex items-center justify-center gap-2 mt-5">
+                <button class="dot" aria-label="Ir a la foto 1"></button>
+                <button class="dot" aria-label="Ir a la foto 2"></button>
+                <button class="dot" aria-label="Ir a la foto 3"></button>
+                <button class="dot" aria-label="Ir a la foto 4"></button>
+                <button class="dot" aria-label="Ir a la foto 5"></button>
+                <button class="dot" aria-label="Ir a la foto 6"></button>
+            </div>
         </div>
     </main>
     <script>
@@ -133,6 +143,12 @@
           var p=document.getElementById('cPrev'),n=document.getElementById('cNext');
           if(p)p.onclick=function(){car.scrollBy({left:-step(),behavior:'smooth'});};
           if(n)n.onclick=function(){car.scrollBy({left:step(),behavior:'smooth'});};
+          var dots=Array.prototype.slice.call(document.querySelectorAll('#cDots .dot'));
+          function active(){return Math.round(car.scrollLeft/step());}
+          function sync(){var i=active();dots.forEach(function(d,k){d.classList.toggle('active',k===i);});}
+          dots.forEach(function(d,k){d.onclick=function(){car.scrollTo({left:step()*k,behavior:'smooth'});};});
+          car.addEventListener('scroll',function(){window.requestAnimationFrame(sync);});
+          sync();
         }
       })();
     </script>
