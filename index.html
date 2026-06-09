@@ -72,6 +72,32 @@
         .marquee-track { display: inline-block; animation: marquee 22s linear infinite; }
         @keyframes marquee { 0% { transform: translateX(0);} 100% { transform: translateX(-50%);} }
             #drawer .nav-link{font-size:1.1rem;}
+
+        .hero-tagline {
+            font-family: 'ChromexRacer', system-ui, sans-serif;
+            letter-spacing: .16em;
+            font-size: clamp(2.2rem, 9vw, 5.5rem);
+            line-height: 1.05;
+            color: #D4A843;
+            animation: riseIn 1s ease-out both;
+        }
+        .hero-tagline span {
+            display: inline-block;
+            color: #b8902f;
+            will-change: color, text-shadow;
+        }
+        .hero-tagline span.lit {
+            animation: letterLight 1.8s ease-in-out;
+        }
+        @keyframes letterLight {
+            0% { color: #b8902f; text-shadow: none; }
+            40% { color: #fff6da; text-shadow: 0 0 22px rgba(255,243,207,.9), 0 0 8px rgba(255,255,255,.85); }
+            100% { color: #b8902f; text-shadow: none; }
+        }
+        @keyframes riseIn { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
+        @media (prefers-reduced-motion: reduce) {
+            .hero-tagline span, .hero-tagline span.lit { animation: none; color: #D4A843; }
+        }
     </style>
 </head>
 <body class="text-white min-h-[100svh] flex flex-col">
@@ -125,7 +151,7 @@
     </header>
 
     <main class="flex-1 flex items-center justify-center px-6 pb-20 text-center">
-        <p class="font-display tracking-[.3em] text-amber/90 text-sm sm:text-base">IN BEATS WE TRUST</p>
+        <h1 class="hero-tagline" id="heroTag" aria-label="IN BEATS WE TRUST">IN BEATS WE TRUST</h1>
     </main>
 
     <div class="marquee fixed bottom-0 left-0 right-0 py-3 border-t border-white/10 bg-black/30 backdrop-blur-sm">
@@ -146,6 +172,35 @@
         function open(){dr.classList.remove('translate-x-full');bd.classList.remove('opacity-0','pointer-events-none');}
         function close(){dr.classList.add('translate-x-full');bd.classList.add('opacity-0','pointer-events-none');}
         if(btn){btn.onclick=open;cls.onclick=close;bd.onclick=close;}
+
+        var tag=document.getElementById('heroTag');
+        if(tag){
+          var txt=tag.textContent, n=txt.length, step=420, letters=[];
+          tag.textContent='';
+          for(var i=0;i<n;i++){
+            var s=document.createElement('span');
+            s.textContent = txt[i]===' ' ? ' ' : txt[i];
+            tag.appendChild(s);
+            if(txt[i]!==' ') letters.push(s);
+          }
+          letters.forEach(function(sp){
+            sp.addEventListener('animationend', function(){ sp.classList.remove('lit'); });
+          });
+          var queue=[];
+          function refill(){
+            queue=letters.slice();
+            for(var j=queue.length-1;j>0;j--){
+              var k=Math.floor(Math.random()*(j+1)), t=queue[j]; queue[j]=queue[k]; queue[k]=t;
+            }
+          }
+          function tick(){
+            if(!queue.length) refill();
+            var sp=queue.shift();
+            sp.classList.remove('lit'); void sp.offsetWidth; sp.classList.add('lit');
+          }
+          refill(); tick();
+          setInterval(tick, step);
+        }
       })();
     </script>
 </body>
