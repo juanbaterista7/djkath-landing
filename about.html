@@ -149,6 +149,19 @@
           dots.forEach(function(d,k){d.onclick=function(){car.scrollTo({left:step()*k,behavior:'smooth'});};});
           car.addEventListener('scroll',function(){window.requestAnimationFrame(sync);});
           sync();
+          var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          if(!reduce){
+            var count=car.querySelectorAll('.cslide').length,timer=null;
+            function advance(){var i=active(),next=(i+1)%count;car.scrollTo({left:step()*next,behavior:'smooth'});}
+            function play(){if(!timer)timer=setInterval(advance,4000);}
+            function pause(){if(timer){clearInterval(timer);timer=null;}}
+            car.addEventListener('mouseenter',pause);
+            car.addEventListener('mouseleave',play);
+            car.addEventListener('touchstart',pause,{passive:true});
+            [p,n].forEach(function(b){if(b)b.addEventListener('click',function(){pause();play();});});
+            dots.forEach(function(d){d.addEventListener('click',function(){pause();play();});});
+            play();
+          }
         }
       })();
     </script>
