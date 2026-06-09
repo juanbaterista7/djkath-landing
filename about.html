@@ -153,7 +153,7 @@
           if(!reduce){
             var count=car.querySelectorAll('.cslide').length,timer=null;
             function advance(){var i=active(),next=(i+1)%count;car.scrollTo({left:step()*next,behavior:'smooth'});}
-            function play(){if(!timer)timer=setInterval(advance,4000);}
+            function play(){if(!timer)timer=setInterval(advance,6000);}
             function pause(){if(timer){clearInterval(timer);timer=null;}}
             car.addEventListener('mouseenter',pause);
             car.addEventListener('mouseleave',play);
