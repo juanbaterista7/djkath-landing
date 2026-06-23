@@ -9,31 +9,30 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Antonio:wght@200;300;400;500&display=swap" rel="stylesheet">
     <script>
         tailwind.config = { theme: { extend: {
             colors: { amber: '#D4A843', warm: '#F97316', ink: '#0F0F0F' },
-            fontFamily: { display: ['ChromexRacer','system-ui','sans-serif'], body: ['Inter','system-ui','sans-serif'] }
+            fontFamily: { display: ['Bebas Neue','system-ui','sans-serif'], body: ['Antonio','system-ui','sans-serif'] }
         } } }
     </script>
     <style>
-        @font-face { font-family:'ChromexRacer'; src:url('fonts/ChromexRacer.ttf') format('truetype'); font-display:swap; }
-        body { font-family:'Inter',system-ui,sans-serif; background:#0F0F0F; }
+        body { font-family:'Antonio',system-ui,sans-serif; font-weight:300; background:#0F0F0F; }
         html { scroll-behavior:smooth; }
-        .font-display { font-family:'ChromexRacer',system-ui,sans-serif; }
-        .page-bg { position:fixed; inset:0; z-index:-2; background-size:cover; background-position:center; }
-        .page-bg::after { content:''; position:absolute; inset:0; background:linear-gradient(180deg, rgba(15,15,15,.70) 0%, rgba(15,15,15,.82) 100%); }
-        .nav-link { font-family:'ChromexRacer',system-ui,sans-serif; letter-spacing:.12em; text-transform:uppercase; font-size:.8rem; color:#fff; opacity:.82; transition:opacity .25s,color .25s; position:relative; padding-bottom:4px; }
+        .font-display { font-family:'Bebas Neue',system-ui,sans-serif; }
+        .nav-link { font-family:'Bebas Neue',system-ui,sans-serif; letter-spacing:.14em; text-transform:uppercase; font-size:.95rem; color:#fff; opacity:.82; transition:opacity .25s,color .25s; position:relative; padding-bottom:4px; }
         .nav-link:hover { opacity:1; color:#D4A843; }
         .nav-link.active { opacity:1; }
         .nav-link.active::after { content:''; position:absolute; left:0; right:0; bottom:-2px; height:2px; background:#D4A843; }
         .social-icon { color:#fff; opacity:.8; transition:opacity .25s,color .25s; }
         .social-icon:hover { opacity:1; color:#D4A843; }
         ::-webkit-scrollbar { width:4px; } ::-webkit-scrollbar-track { background:#0F0F0F; } ::-webkit-scrollbar-thumb { background:#D4A843; border-radius:2px; }
-            #drawer .nav-link{font-size:1.1rem;}
-        #carousel{scrollbar-width:none;} #carousel::-webkit-scrollbar{display:none;}
-        .dot{width:8px;height:8px;border-radius:9999px;background:rgba(255,255,255,.35);transition:all .25s;}
-        .dot.active{width:22px;background:#D4A843;}
+            #drawer .nav-link{font-size:1.2rem;}
+        .bio p { font-weight:300; letter-spacing:.01em; }
+        .bio .up { font-weight:500; color:#fff; text-transform:uppercase; letter-spacing:.04em; }
+        .bio .hl { color:#D4A843; font-weight:500; }
+        .vcard { position:relative; overflow:hidden; border-radius:.6rem; background:#000; ring:1px; }
+        .vcard video { display:block; width:100%; height:100%; }
     </style>
 </head>
 <body class="text-white">
@@ -58,15 +57,20 @@
       <div class="mt-auto flex items-center gap-6 px-8 pb-10">
         <a href="https://www.instagram.com/djkath____/" target="_blank" rel="noopener" aria-label="Instagram" class="social-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 0 1-1.38-.9 3.7 3.7 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23C2.17 15.58 2.16 15.2 2.16 12s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16M12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63c-.79.31-1.46.72-2.12 1.38C1.36 2.67.95 3.34.63 4.14.33 4.9.13 5.78.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.31.8.72 1.47 1.38 2.13.66.66 1.33 1.07 2.12 1.38.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56.8-.31 1.47-.72 2.13-1.38.66-.66 1.07-1.33 1.38-2.13.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91a5.9 5.9 0 0 0-1.38-2.12A5.9 5.9 0 0 0 19.86.63c-.76-.3-1.64-.5-2.91-.56C15.67.01 15.26 0 12 0z"/><path d="M12 5.84A6.16 6.16 0 1 0 18.16 12 6.16 6.16 0 0 0 12 5.84zM12 16a4 4 0 1 1 4-4 4 4 0 0 1-4 4z"/><circle cx="18.41" cy="5.59" r="1.44"/></svg></a>
         <a href="https://www.tiktok.com/@djkath____" target="_blank" rel="noopener" aria-label="TikTok" class="social-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.04-.1z"/></svg></a>
-      </div>
+        <a href="https://www.youtube.com/@DjKathh" target="_blank" rel="noopener" aria-label="YouTube" class="social-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+        <a href="https://open.spotify.com/user/12130058466" target="_blank" rel="noopener" aria-label="Spotify" class="social-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.84-.179-.96-.6-.122-.42.18-.84.6-.96 4.561-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg></a>
+        <a href="https://soundcloud.com/katherine-vargas-pineda" target="_blank" rel="noopener" aria-label="SoundCloud" class="social-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M1.175 12.225c-.051 0-.094.046-.101.1l-.233 2.154.233 2.105c.007.058.05.098.101.098.05 0 .09-.04.099-.098l.255-2.105-.27-2.154c0-.057-.045-.1-.09-.1m-.899.828c-.06 0-.091.037-.104.094L0 14.479l.165 1.308c0 .055.045.094.09.094s.089-.045.104-.104l.21-1.319-.21-1.334c0-.061-.044-.09-.09-.09m1.83-1.229c-.061 0-.12.045-.12.104l-.21 2.563.225 2.458c0 .06.045.12.119.12.061 0 .105-.061.121-.12l.254-2.474-.254-2.548c-.016-.06-.061-.12-.121-.12m.945-.089c-.075 0-.135.06-.15.135l-.193 2.64.21 2.544c.016.077.075.138.149.138.075 0 .135-.061.15-.15l.24-2.532-.24-2.623c0-.075-.06-.135-.135-.135l-.031-.005zm1.155.36c-.005-.09-.075-.149-.159-.149-.09 0-.158.06-.164.149l-.217 2.43.2 2.563c0 .09.075.157.159.157.074 0 .148-.068.148-.158l.227-2.563-.227-2.444.033.014.067-.012zm.809-1.709c-.101 0-.18.09-.18.181l-.21 3.957.187 2.563c0 .09.08.164.18.164.094 0 .174-.09.18-.18l.209-2.563-.209-3.972c-.008-.104-.088-.18-.18-.18m.959-.914c-.105 0-.195.09-.203.194l-.18 4.872.165 2.548c0 .12.09.209.195.209.104 0 .194-.089.21-.209l.193-2.548-.192-4.856c-.016-.12-.105-.21-.21-.21m1.034-.402c-.121 0-.211.089-.225.209l-.165 5.275.165 2.52c.014.119.104.225.225.225.119 0 .225-.105.225-.225l.195-2.52-.196-5.275c0-.12-.105-.225-.225-.225m1.155.045c0-.135-.105-.24-.24-.24-.119 0-.24.105-.24.24l-.149 5.441.149 2.504c.016.135.121.24.256.24.119 0 .24-.105.24-.24l.165-2.504-.18-5.456zm1.245-.066c0-.075-.029-.149-.075-.196-.06-.06-.119-.09-.196-.09-.06 0-.135.03-.18.075-.061.061-.105.135-.105.21l-.182 5.532.165 2.488c0 .15.135.285.285.285s.285-.135.285-.285l.18-2.488-.18-5.532-.022.011-.005-.005zm1.184-1.273c-.067-.052-.142-.082-.225-.082-.119 0-.24.046-.314.135-.075.075-.135.181-.135.301l-.027.244-.135 5.382.165 2.473c0 .181.165.345.345.345s.345-.164.36-.36l.15-2.458-.165-5.398c0-.135-.061-.255-.15-.33m1.245-.045c-.075-.044-.165-.075-.255-.075-.105 0-.21.03-.285.09-.105.075-.18.211-.18.345l-.014.149-.165 5.503.165 2.443c.016.21.18.375.39.375.196 0 .375-.165.39-.375l.165-2.443-.165-5.503c-.016-.165-.105-.3-.236-.36m2.475 1.808c-.21 0-.405.054-.585.149-.12-1.348-1.245-2.413-2.625-2.413-.345 0-.675.075-.96.196-.105.044-.135.09-.135.18v6.78c0 .09.075.165.165.18h4.155c.825 0 1.5-.66 1.5-1.485s-.66-1.5-1.485-1.5"/></svg></a>
+        </div>
     </aside>
-    <div class="page-bg" style="background-image:url('img/bg-about.webp');background-position:center top"></div>
 
     <!-- HEADER -->
     <header class="flex flex-col items-center pt-8 px-6">
         <div class="flex items-center gap-6 mb-5">
             <a href="https://www.instagram.com/djkath____/" target="_blank" rel="noopener" aria-label="Instagram" class="social-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 0 1-1.38-.9 3.7 3.7 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23C2.17 15.58 2.16 15.2 2.16 12s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16M12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63c-.79.31-1.46.72-2.12 1.38C1.36 2.67.95 3.34.63 4.14.33 4.9.13 5.78.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.31.8.72 1.47 1.38 2.13.66.66 1.33 1.07 2.12 1.38.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56.8-.31 1.47-.72 2.13-1.38.66-.66 1.07-1.33 1.38-2.13.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91a5.9 5.9 0 0 0-1.38-2.12A5.9 5.9 0 0 0 19.86.63c-.76-.3-1.64-.5-2.91-.56C15.67.01 15.26 0 12 0z"/><path d="M12 5.84A6.16 6.16 0 1 0 18.16 12 6.16 6.16 0 0 0 12 5.84zM12 16a4 4 0 1 1 4-4 4 4 0 0 1-4 4z"/><circle cx="18.41" cy="5.59" r="1.44"/></svg></a>
             <a href="https://www.tiktok.com/@djkath____" target="_blank" rel="noopener" aria-label="TikTok" class="social-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.04-.1z"/></svg></a>
+            <a href="https://www.youtube.com/@DjKathh" target="_blank" rel="noopener" aria-label="YouTube" class="social-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+            <a href="https://open.spotify.com/user/12130058466" target="_blank" rel="noopener" aria-label="Spotify" class="social-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.84-.179-.96-.6-.122-.42.18-.84.6-.96 4.561-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg></a>
+            <a href="https://soundcloud.com/katherine-vargas-pineda" target="_blank" rel="noopener" aria-label="SoundCloud" class="social-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M1.175 12.225c-.051 0-.094.046-.101.1l-.233 2.154.233 2.105c.007.058.05.098.101.098.05 0 .09-.04.099-.098l.255-2.105-.27-2.154c0-.057-.045-.1-.09-.1m-.899.828c-.06 0-.091.037-.104.094L0 14.479l.165 1.308c0 .055.045.094.09.094s.089-.045.104-.104l.21-1.319-.21-1.334c0-.061-.044-.09-.09-.09m1.83-1.229c-.061 0-.12.045-.12.104l-.21 2.563.225 2.458c0 .06.045.12.119.12.061 0 .105-.061.121-.12l.254-2.474-.254-2.548c-.016-.06-.061-.12-.121-.12m.945-.089c-.075 0-.135.06-.15.135l-.193 2.64.21 2.544c.016.077.075.138.149.138.075 0 .135-.061.15-.15l.24-2.532-.24-2.623c0-.075-.06-.135-.135-.135l-.031-.005zm1.155.36c-.005-.09-.075-.149-.159-.149-.09 0-.158.06-.164.149l-.217 2.43.2 2.563c0 .09.075.157.159.157.074 0 .148-.068.148-.158l.227-2.563-.227-2.444.033.014.067-.012zm.809-1.709c-.101 0-.18.09-.18.181l-.21 3.957.187 2.563c0 .09.08.164.18.164.094 0 .174-.09.18-.18l.209-2.563-.209-3.972c-.008-.104-.088-.18-.18-.18m.959-.914c-.105 0-.195.09-.203.194l-.18 4.872.165 2.548c0 .12.09.209.195.209.104 0 .194-.089.21-.209l.193-2.548-.192-4.856c-.016-.12-.105-.21-.21-.21m1.034-.402c-.121 0-.211.089-.225.209l-.165 5.275.165 2.52c.014.119.104.225.225.225.119 0 .225-.105.225-.225l.195-2.52-.196-5.275c0-.12-.105-.225-.225-.225m1.155.045c0-.135-.105-.24-.24-.24-.119 0-.24.105-.24.24l-.149 5.441.149 2.504c.016.135.121.24.256.24.119 0 .24-.105.24-.24l.165-2.504-.18-5.456zm1.245-.066c0-.075-.029-.149-.075-.196-.06-.06-.119-.09-.196-.09-.06 0-.135.03-.18.075-.061.061-.105.135-.105.21l-.182 5.532.165 2.488c0 .15.135.285.285.285s.285-.135.285-.285l.18-2.488-.18-5.532-.022.011-.005-.005zm1.184-1.273c-.067-.052-.142-.082-.225-.082-.119 0-.24.046-.314.135-.075.075-.135.181-.135.301l-.027.244-.135 5.382.165 2.473c0 .181.165.345.345.345s.345-.164.36-.36l.15-2.458-.165-5.398c0-.135-.061-.255-.15-.33m1.245-.045c-.075-.044-.165-.075-.255-.075-.105 0-.21.03-.285.09-.105.075-.18.211-.18.345l-.014.149-.165 5.503.165 2.443c.016.21.18.375.39.375.196 0 .375-.165.39-.375l.165-2.443-.165-5.503c-.016-.165-.105-.3-.236-.36m2.475 1.808c-.21 0-.405.054-.585.149-.12-1.348-1.245-2.413-2.625-2.413-.345 0-.675.075-.96.196-.105.044-.135.09-.135.18v6.78c0 .09.075.165.165.18h4.155c.825 0 1.5-.66 1.5-1.485s-.66-1.5-1.485-1.5"/></svg></a>
         </div>
         <a href="index.html"><img src="img/logo-kath-amarillo.png" alt="DJ Kath" class="w-[150px] sm:w-[180px]"></a>
         <nav class="hidden sm:flex sm:flex-wrap sm:items-center sm:justify-center sm:gap-x-7 mt-6">
@@ -79,52 +83,72 @@
         </nav>
     </header>
 
-    <!-- CONTENT -->
-    <main class="max-w-3xl mx-auto px-6 py-14">
-        <h1 class="font-display text-3xl sm:text-4xl tracking-[.08em] text-amber mb-2">ABOUT</h1>
-        <p class="font-display tracking-[.25em] text-xs text-white/70 mb-10">AFROBEATS · AMAPIANO · DANCEHALL · MOOMBAHTON</p>
+    <!-- BIO -->
+    <main class="max-w-5xl mx-auto px-6 py-14">
+        <h1 class="font-display text-5xl sm:text-6xl tracking-[.04em] text-amber leading-none">ABOUT</h1>
+        <p class="font-display tracking-[.28em] text-sm text-white/70 mb-10 mt-1">AFROBEATS · AMAPIANO · DANCEHALL · MOOMBAHTON</p>
 
-        <div class="space-y-6 text-white/85 leading-relaxed text-[15px] sm:text-base text-justify [hyphens:auto]">
-            <p><span class="text-amber font-medium">DJ Kath</span> es una DJ y directora creativa de Medellín, Colombia, apasionada por la música y las expresiones culturales de la diáspora africana. Su propuesta musical fusiona géneros como afrobeats, amapiano, dancehall y moombahton, creando experiencias vibrantes y alternativas que conectan a las personas a través del baile, la energía positiva y la celebración colectiva.</p>
-
-            <p>Su objetivo es transformar cada pista de baile en un espacio de alegría, libertad y encuentro cultural. Su pasión por la música y su amor por la cultura se reflejan en una cuidada selección musical que invita a públicos de diferentes orígenes a compartir y disfrutar el momento.</p>
-
-            <p>A lo largo de su carrera, ha representado a Colombia en importantes festivales internacionales, entre ellos <span class="text-white font-medium">Rototom Sunsplash</span> (España), uno de los festivales más importantes del mundo para la música reggae, dancehall y afro en general. También ha compartido escenario con destacados artistas de la escena global como Dread Mar I, Alborosie, Kybba, Jossman, Afro Bros, Green Valley, Kalibwoy y Blaiz Fayah, entre otros. Además, fue la DJ oficial de <span class="text-white font-medium">Afro B</span> durante su regreso a Latinoamérica tras su gira europea.</p>
-
-            <p>A través de sus reconocidas fiestas, ha construido una plataforma única para la cultura afro y dancehall en Medellín, reuniendo a destacados artistas, selectores y amantes de la música en sesiones especiales de hasta cinco horas de duración, donde la conexión con el público y la exploración musical son protagonistas.</p>
-
-            <p>Desde Medellín, DJ Kath se ha consolidado como una de las figuras más representativas de la escena afrobeats, dancehall y amapiano en Colombia. Gracias a su energía única detrás de las tornamesas, ha desarrollado una sólida trayectoria con presentaciones y giras nacionales e internacionales en países como México, Ecuador, Chile y diversas ciudades de Europa, llevando su sonido y visión cultural a escenarios de todo el mundo.</p>
-        </div>
-
-        <!-- Carrusel en vivo -->
-        <div class="mt-16">
-            <h2 class="font-display text-2xl sm:text-3xl tracking-[.08em] text-amber mb-6">EN VIVO</h2>
-            <div class="relative">
-                <div id="carousel" class="flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-smooth py-2">
-                    <div class="cslide snap-center shrink-0 w-[88%] sm:w-[60%] lg:w-[48%] p-4 bg-ink rounded-lg ring-2 ring-amber/60"><img src="img/carrusel/c1.webp" alt="DJ Kath en vivo" loading="lazy" class="block w-full aspect-[4/3] object-cover rounded-md"></div>
-                    <div class="cslide snap-center shrink-0 w-[88%] sm:w-[60%] lg:w-[48%] p-4 bg-ink rounded-lg ring-2 ring-amber/60"><img src="img/carrusel/c2.webp" alt="DJ Kath en vivo" loading="lazy" class="block w-full aspect-[4/3] object-cover rounded-md"></div>
-                    <div class="cslide snap-center shrink-0 w-[88%] sm:w-[60%] lg:w-[48%] p-4 bg-ink rounded-lg ring-2 ring-amber/60"><img src="img/carrusel/c3.webp" alt="DJ Kath en vivo" loading="lazy" class="block w-full aspect-[4/3] object-cover rounded-md"></div>
-                    <div class="cslide snap-center shrink-0 w-[88%] sm:w-[60%] lg:w-[48%] p-4 bg-ink rounded-lg ring-2 ring-amber/60"><img src="img/carrusel/c4.webp" alt="DJ Kath en vivo" loading="lazy" class="block w-full aspect-[4/3] object-cover rounded-md"></div>
-                    <div class="cslide snap-center shrink-0 w-[88%] sm:w-[60%] lg:w-[48%] p-4 bg-ink rounded-lg ring-2 ring-amber/60"><img src="img/carrusel/c5.webp" alt="DJ Kath en vivo" loading="lazy" class="block w-full aspect-[4/3] object-cover rounded-md"></div>
-                    <div class="cslide snap-center shrink-0 w-[88%] sm:w-[60%] lg:w-[48%] p-4 bg-ink rounded-lg ring-2 ring-amber/60"><img src="img/carrusel/c6.webp" alt="DJ Kath en vivo" loading="lazy" class="block w-full aspect-[4/3] object-cover rounded-md"></div>
-                </div>
-                <button id="cPrev" aria-label="Anterior" class="hidden sm:flex absolute left-2 top-1/2 -translate-y-1/2 items-center justify-center w-11 h-11 rounded-full bg-black/55 backdrop-blur text-white hover:bg-amber hover:text-ink transition">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-                </button>
-                <button id="cNext" aria-label="Siguiente" class="hidden sm:flex absolute right-2 top-1/2 -translate-y-1/2 items-center justify-center w-11 h-11 rounded-full bg-black/55 backdrop-blur text-white hover:bg-amber hover:text-ink transition">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-                </button>
+        <div class="grid md:grid-cols-[minmax(0,38%)_1fr] gap-8 lg:gap-12 items-start">
+            <!-- Foto editada -->
+            <div class="md:sticky md:top-10">
+                <img src="img/about-portrait.webp" alt="DJ Kath" class="w-full rounded-xl ring-1 ring-amber/40 shadow-[0_10px_40px_rgba(0,0,0,.6)]">
             </div>
-            <div id="cDots" class="flex items-center justify-center gap-2 mt-5">
-                <button class="dot" aria-label="Ir a la foto 1"></button>
-                <button class="dot" aria-label="Ir a la foto 2"></button>
-                <button class="dot" aria-label="Ir a la foto 3"></button>
-                <button class="dot" aria-label="Ir a la foto 4"></button>
-                <button class="dot" aria-label="Ir a la foto 5"></button>
-                <button class="dot" aria-label="Ir a la foto 6"></button>
+            <!-- Texto -->
+            <div class="bio space-y-5 text-white/85 leading-relaxed text-[17px] sm:text-lg">
+                <p><span class="hl">DJ Kath</span> es una DJ y directora creativa de <span class="up">Medellín</span>, Colombia, apasionada por la música y las expresiones culturales de la diáspora africana. Su propuesta musical fusiona géneros como afrobeats, amapiano, dancehall y moombahton, creando experiencias vibrantes y alternativas que conectan a las personas a través del baile, la energía positiva y la celebración colectiva.</p>
+
+                <p>Su objetivo es transformar cada pista de baile en un espacio de alegría, libertad y encuentro cultural. Su pasión por la música y su amor por la cultura se reflejan en una cuidada selección musical que invita a públicos de diferentes orígenes a compartir y disfrutar el momento.</p>
+
+                <p>A lo largo de su carrera, ha representado a Colombia en importantes festivales internacionales, entre ellos <span class="up">Rototom Sunsplash</span> (España), uno de los festivales más importantes del mundo para la música reggae, dancehall y afro. También ha compartido escenario con destacados artistas de la escena global como <span class="up">Dread Mar I</span>, <span class="up">Alborosie</span>, <span class="up">Kybba</span>, <span class="up">Jossman</span>, <span class="up">Afro Bros</span>, <span class="up">Green Valley</span>, <span class="up">Kalibwoy</span> y <span class="up">Blaiz Fayah</span>, entre otros. Además, fue la DJ oficial de <span class="up">Afro B</span> durante su regreso a Latinoamérica tras su gira europea.</p>
+
+                <p>A través de sus reconocidas fiestas, ha construido una plataforma única para la cultura afro y dancehall en Medellín, reuniendo a destacados artistas, selectores y amantes de la música en sesiones especiales de hasta cinco horas de duración, donde la conexión con el público y la exploración musical son protagonistas.</p>
+
+                <p>Desde Medellín, DJ Kath se ha consolidado como una de las figuras más representativas de la escena afrobeats, dancehall y amapiano en Colombia. Gracias a su energía única detrás de las tornamesas, ha desarrollado una sólida trayectoria con presentaciones y giras nacionales e internacionales en países como <span class="up">México</span>, <span class="up">Ecuador</span>, <span class="up">Chile</span> y diversas ciudades de <span class="up">Europa</span>, llevando su sonido y visión cultural a escenarios de todo el mundo.</p>
             </div>
         </div>
+
+        <!-- KATH EN VIVO -->
+        <section class="mt-20">
+            <h2 class="font-display text-4xl sm:text-5xl tracking-[.04em] text-amber leading-none">KATH EN VIVO</h2>
+            <p class="font-display tracking-[.28em] text-sm text-white/60 mt-1 mb-8">PRESENTACIONES · FESTIVALES · SESSIONS</p>
+
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
+                <figure class="vcard aspect-[9/16] ring-1 ring-white/10">
+                    <video class="object-cover" preload="none" controls playsinline poster="img/videos/rototom-espana.jpg"><source src="img/videos/rototom-espana.mp4" type="video/mp4"></video>
+                    <figcaption class="font-display tracking-[.12em] text-xs text-white/75 absolute bottom-0 left-0 right-0 px-3 py-2 bg-gradient-to-t from-black/85 to-transparent pointer-events-none">ROTOTOM · ESPAÑA</figcaption>
+                </figure>
+                <figure class="vcard aspect-[9/16] ring-1 ring-white/10">
+                    <video class="object-cover" preload="none" controls playsinline poster="img/videos/afro-bross.jpg"><source src="img/videos/afro-bross.mp4" type="video/mp4"></video>
+                    <figcaption class="font-display tracking-[.12em] text-xs text-white/75 absolute bottom-0 left-0 right-0 px-3 py-2 bg-gradient-to-t from-black/85 to-transparent pointer-events-none">AFRO BROS</figcaption>
+                </figure>
+                <figure class="vcard aspect-[9/16] ring-1 ring-white/10">
+                    <video class="object-cover" preload="none" controls playsinline poster="img/videos/dread-mar-i.jpg"><source src="img/videos/dread-mar-i.mp4" type="video/mp4"></video>
+                    <figcaption class="font-display tracking-[.12em] text-xs text-white/75 absolute bottom-0 left-0 right-0 px-3 py-2 bg-gradient-to-t from-black/85 to-transparent pointer-events-none">DREAD MAR I</figcaption>
+                </figure>
+                <figure class="vcard aspect-[9/16] ring-1 ring-white/10">
+                    <video class="object-cover" preload="none" controls playsinline poster="img/videos/kybba.jpg"><source src="img/videos/kybba.mp4" type="video/mp4"></video>
+                    <figcaption class="font-display tracking-[.12em] text-xs text-white/75 absolute bottom-0 left-0 right-0 px-3 py-2 bg-gradient-to-t from-black/85 to-transparent pointer-events-none">KYBBA</figcaption>
+                </figure>
+                <figure class="vcard aspect-[9/16] ring-1 ring-white/10">
+                    <video class="object-cover" preload="none" controls playsinline poster="img/videos/performance.jpg"><source src="img/videos/performance.mp4" type="video/mp4"></video>
+                    <figcaption class="font-display tracking-[.12em] text-xs text-white/75 absolute bottom-0 left-0 right-0 px-3 py-2 bg-gradient-to-t from-black/85 to-transparent pointer-events-none">PERFORMANCE</figcaption>
+                </figure>
+                <figure class="vcard aspect-[9/16] ring-1 ring-white/10">
+                    <video class="object-cover" preload="none" controls playsinline poster="img/videos/set.jpg"><source src="img/videos/set.mp4" type="video/mp4"></video>
+                    <figcaption class="font-display tracking-[.12em] text-xs text-white/75 absolute bottom-0 left-0 right-0 px-3 py-2 bg-gradient-to-t from-black/85 to-transparent pointer-events-none">SET</figcaption>
+                </figure>
+                <figure class="vcard aspect-[9/16] ring-1 ring-white/10">
+                    <video class="object-cover" preload="none" controls playsinline poster="img/videos/session-1-pool-party.jpg"><source src="img/videos/session-1-pool-party.mp4" type="video/mp4"></video>
+                    <figcaption class="font-display tracking-[.12em] text-xs text-white/75 absolute bottom-0 left-0 right-0 px-3 py-2 bg-gradient-to-t from-black/85 to-transparent pointer-events-none">SESSION 1 · POOL PARTY</figcaption>
+                </figure>
+                <figure class="vcard aspect-[9/16] ring-1 ring-white/10">
+                    <video class="object-contain bg-black" preload="none" controls playsinline poster="img/videos/session-2.jpg"><source src="img/videos/session-2.mp4" type="video/mp4"></video>
+                    <figcaption class="font-display tracking-[.12em] text-xs text-white/75 absolute bottom-0 left-0 right-0 px-3 py-2 bg-gradient-to-t from-black/85 to-transparent pointer-events-none">SESSION 2</figcaption>
+                </figure>
+            </div>
+        </section>
     </main>
+
     <script>
       (function(){
         var page=(location.pathname.split('/').pop()||'index.html');
@@ -137,32 +161,17 @@
         function open(){dr.classList.remove('translate-x-full');bd.classList.remove('opacity-0','pointer-events-none');}
         function close(){dr.classList.add('translate-x-full');bd.classList.add('opacity-0','pointer-events-none');}
         if(btn){btn.onclick=open;cls.onclick=close;bd.onclick=close;}
-        var car=document.getElementById('carousel');
-        if(car){
-          var step=function(){var s=car.querySelector('.cslide');return s?s.getBoundingClientRect().width+16:car.clientWidth;};
-          var p=document.getElementById('cPrev'),n=document.getElementById('cNext');
-          if(p)p.onclick=function(){car.scrollBy({left:-step(),behavior:'smooth'});};
-          if(n)n.onclick=function(){car.scrollBy({left:step(),behavior:'smooth'});};
-          var dots=Array.prototype.slice.call(document.querySelectorAll('#cDots .dot'));
-          function active(){return Math.round(car.scrollLeft/step());}
-          function sync(){var i=active();dots.forEach(function(d,k){d.classList.toggle('active',k===i);});}
-          dots.forEach(function(d,k){d.onclick=function(){car.scrollTo({left:step()*k,behavior:'smooth'});};});
-          car.addEventListener('scroll',function(){window.requestAnimationFrame(sync);});
-          sync();
-          var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-          if(!reduce){
-            var count=car.querySelectorAll('.cslide').length,timer=null;
-            function advance(){var i=active(),next=(i+1)%count;car.scrollTo({left:step()*next,behavior:'smooth'});}
-            function play(){if(!timer)timer=setInterval(advance,6000);}
-            function pause(){if(timer){clearInterval(timer);timer=null;}}
-            car.addEventListener('mouseenter',pause);
-            car.addEventListener('mouseleave',play);
-            car.addEventListener('touchstart',pause,{passive:true});
-            [p,n].forEach(function(b){if(b)b.addEventListener('click',function(){pause();play();});});
-            dots.forEach(function(d){d.addEventListener('click',function(){pause();play();});});
-            play();
-          }
-        }
+        // Pausar otros videos al reproducir uno
+        var vids=Array.prototype.slice.call(document.querySelectorAll('.vcard video'));
+        vids.forEach(function(v){
+          v.addEventListener('play',function(){
+            vids.forEach(function(o){ if(o!==v) o.pause(); });
+            var cap=v.parentNode.querySelector('figcaption'); if(cap) cap.style.opacity='0';
+          });
+          v.addEventListener('pause',function(){
+            var cap=v.parentNode.querySelector('figcaption'); if(cap) cap.style.opacity='1';
+          });
+        });
       })();
     </script>
 </body>
