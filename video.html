@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DJ KATH — Video</title>
-    <meta name="description" content="Kath Session — sesión en vivo de DJ Kath.">
+    <title>DJ KATH — Fotos y video</title>
+    <meta name="description" content="Kath Session — fotos y sesión en vivo de DJ Kath.">
     <link rel="icon" href="img/logo-kath-amarillo.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -48,7 +48,7 @@
         <a href="about.html" class="nav-link">About</a>
         <a href="tour.html" class="nav-link">Tour</a>
         <a href="music.html" class="nav-link">Music</a>
-        <a href="video.html" class="nav-link">Video</a>
+        <a href="video.html" class="nav-link">Fotos y video</a>
         <a href="contact.html" class="nav-link">Contact</a>
       </nav>
       <div class="mt-auto flex items-center gap-6 px-8 pb-10">
@@ -75,23 +75,65 @@
             <a href="about.html" class="nav-link">About</a>
             <a href="tour.html" class="nav-link">Tour</a>
             <a href="music.html" class="nav-link">Music</a>
-            <a href="video.html" class="nav-link active">Video</a>
+            <a href="video.html" class="nav-link active">Fotos y video</a>
             <a href="contact.html" class="nav-link">Contact</a>
         </nav>
     </header>
 
-    <main class="max-w-4xl mx-auto px-6 py-14">
-        <h1 class="font-display text-3xl sm:text-4xl tracking-[.08em] text-amber mb-2">VIDEO</h1>
+    <main class="max-w-5xl mx-auto px-6 py-14">
+        <h1 class="font-display text-3xl sm:text-4xl tracking-[.08em] text-amber mb-2">FOTOS Y VIDEO</h1>
         <p class="font-display tracking-[.25em] text-xs text-white/70 mb-10">KATH SESSION</p>
 
-        <div class="border border-white/15 bg-black/40">
+        <div class="border border-white/15 bg-black/40 max-w-4xl mx-auto">
             <video controls preload="none" poster="img/video-poster.jpg" class="w-full aspect-video bg-black">
                 <source src="img/kath-session.mp4?v=2" type="video/mp4">
                 Tu navegador no soporta video HTML5.
             </video>
         </div>
         <p class="text-white/50 text-sm text-center mt-6">Sesión en vivo · Afrobeats · Amapiano · Dancehall</p>
+
+        <!-- Galería de fotos -->
+        <div class="flex items-center gap-4 mt-20 mb-8">
+            <span class="h-px flex-1 bg-white/15"></span>
+            <h2 class="font-display text-2xl sm:text-3xl tracking-[.12em] text-amber">GALERÍA</h2>
+            <span class="h-px flex-1 bg-white/15"></span>
+        </div>
+
+        <div class="columns-2 sm:columns-3 gap-3 [&>button]:mb-3">
+            <button class="gal group relative block w-full overflow-hidden rounded-lg break-inside-avoid" data-src="img/carrusel/c2.webp">
+                <img src="img/carrusel/c2.webp" alt="DJ Kath en vivo" loading="lazy" class="w-full transition duration-500 group-hover:scale-105">
+                <span class="absolute inset-0 ring-1 ring-inset ring-white/10 group-hover:ring-amber/70 transition"></span>
+            </button>
+            <button class="gal group relative block w-full overflow-hidden rounded-lg break-inside-avoid" data-src="img/carrusel/c1.webp">
+                <img src="img/carrusel/c1.webp" alt="DJ Kath en vivo" loading="lazy" class="w-full transition duration-500 group-hover:scale-105">
+                <span class="absolute inset-0 ring-1 ring-inset ring-white/10 group-hover:ring-amber/70 transition"></span>
+            </button>
+            <button class="gal group relative block w-full overflow-hidden rounded-lg break-inside-avoid" data-src="img/carrusel/c5.webp">
+                <img src="img/carrusel/c5.webp" alt="DJ Kath en vivo" loading="lazy" class="w-full transition duration-500 group-hover:scale-105">
+                <span class="absolute inset-0 ring-1 ring-inset ring-white/10 group-hover:ring-amber/70 transition"></span>
+            </button>
+            <button class="gal group relative block w-full overflow-hidden rounded-lg break-inside-avoid" data-src="img/carrusel/c4.webp">
+                <img src="img/carrusel/c4.webp" alt="DJ Kath en vivo" loading="lazy" class="w-full transition duration-500 group-hover:scale-105">
+                <span class="absolute inset-0 ring-1 ring-inset ring-white/10 group-hover:ring-amber/70 transition"></span>
+            </button>
+            <button class="gal group relative block w-full overflow-hidden rounded-lg break-inside-avoid" data-src="img/carrusel/c3.webp">
+                <img src="img/carrusel/c3.webp" alt="DJ Kath en vivo" loading="lazy" class="w-full transition duration-500 group-hover:scale-105">
+                <span class="absolute inset-0 ring-1 ring-inset ring-white/10 group-hover:ring-amber/70 transition"></span>
+            </button>
+            <button class="gal group relative block w-full overflow-hidden rounded-lg break-inside-avoid" data-src="img/carrusel/c6.webp">
+                <img src="img/carrusel/c6.webp" alt="DJ Kath en vivo" loading="lazy" class="w-full transition duration-500 group-hover:scale-105">
+                <span class="absolute inset-0 ring-1 ring-inset ring-white/10 group-hover:ring-amber/70 transition"></span>
+            </button>
+        </div>
     </main>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="fixed inset-0 z-[70] hidden items-center justify-center bg-black/90 backdrop-blur-sm p-6">
+        <button id="lbClose" aria-label="Cerrar" class="absolute top-5 right-6 text-white/80 hover:text-amber">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/></svg>
+        </button>
+        <img id="lbImg" src="" alt="" class="max-w-full max-h-[85vh] object-contain rounded-lg shadow-2xl">
+    </div>
     <script>
       (function(){
         var page=(location.pathname.split('/').pop()||'index.html');
@@ -104,6 +146,14 @@
         function open(){dr.classList.remove('translate-x-full');bd.classList.remove('opacity-0','pointer-events-none');}
         function close(){dr.classList.add('translate-x-full');bd.classList.add('opacity-0','pointer-events-none');}
         if(btn){btn.onclick=open;cls.onclick=close;bd.onclick=close;}
+
+        var lb=document.getElementById('lightbox'),lbImg=document.getElementById('lbImg'),lbClose=document.getElementById('lbClose');
+        function lbOpen(src){lbImg.src=src;lb.classList.remove('hidden');lb.classList.add('flex');document.body.style.overflow='hidden';}
+        function lbHide(){lb.classList.add('hidden');lb.classList.remove('flex');lbImg.src='';document.body.style.overflow='';}
+        document.querySelectorAll('.gal').forEach(function(b){b.addEventListener('click',function(){lbOpen(b.dataset.src);});});
+        lbClose.onclick=lbHide;
+        lb.addEventListener('click',function(e){if(e.target===lb)lbHide();});
+        document.addEventListener('keydown',function(e){if(e.key==='Escape')lbHide();});
       })();
     </script>
 </body>
