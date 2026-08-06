@@ -45,6 +45,10 @@
         @media (prefers-reduced-motion: reduce) {
             .vcard::before { animation:none; background:#D4A843; }
         }
+        .vcap { font-family:'Bebas Neue',system-ui,sans-serif; letter-spacing:.12em; font-size:.75rem; line-height:1.15;
+            color:rgba(255,255,255,.78); position:absolute; bottom:3px; left:3px; right:3px; z-index:10;
+            padding:1.4rem .7rem .55rem; pointer-events:none; border-radius:0 0 calc(.6rem - 3px) calc(.6rem - 3px);
+            background:linear-gradient(to top, rgba(0,0,0,.88), transparent); }
     </style>
 </head>
 <body class="text-white">
@@ -120,38 +124,42 @@
             <h2 class="font-display text-4xl sm:text-5xl tracking-[.04em] text-amber leading-none">KATH EN VIVO</h2>
             <p class="font-display tracking-[.28em] text-sm text-white/60 mt-1 mb-8">PRESENTACIONES · FESTIVALES · SESSIONS</p>
 
-            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
+            <div class="vgrid grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 items-start">
                 <figure class="vcard aspect-[9/16]">
                     <video class="object-cover" preload="none" controls playsinline poster="img/videos/rototom-espana.jpg"><source src="img/videos/rototom-espana.mp4" type="video/mp4"></video>
-                    <figcaption class="font-display tracking-[.12em] text-xs text-white/75 absolute bottom-0 left-0 right-0 z-10 px-3 py-2 bg-gradient-to-t from-black/85 to-transparent pointer-events-none">ROTOTOM · ESPAÑA</figcaption>
+                    <figcaption class="vcap">DJ KATH X ROTOTOM ESPAÑA</figcaption>
                 </figure>
                 <figure class="vcard aspect-[9/16]">
                     <video class="object-cover" preload="none" controls playsinline poster="img/videos/afro-bross.jpg"><source src="img/videos/afro-bross.mp4" type="video/mp4"></video>
-                    <figcaption class="font-display tracking-[.12em] text-xs text-white/75 absolute bottom-0 left-0 right-0 z-10 px-3 py-2 bg-gradient-to-t from-black/85 to-transparent pointer-events-none">AFRO BROS</figcaption>
+                    <figcaption class="vcap">DJ KATH X AFRO BROSS</figcaption>
                 </figure>
                 <figure class="vcard aspect-[9/16]">
                     <video class="object-cover" preload="none" controls playsinline poster="img/videos/dread-mar-i.jpg"><source src="img/videos/dread-mar-i.mp4" type="video/mp4"></video>
-                    <figcaption class="font-display tracking-[.12em] text-xs text-white/75 absolute bottom-0 left-0 right-0 z-10 px-3 py-2 bg-gradient-to-t from-black/85 to-transparent pointer-events-none">DREAD MAR I</figcaption>
+                    <figcaption class="vcap">DJ KATH X DREAD MAR I</figcaption>
                 </figure>
                 <figure class="vcard aspect-[9/16]">
                     <video class="object-cover" preload="none" controls playsinline poster="img/videos/kybba.jpg"><source src="img/videos/kybba.mp4" type="video/mp4"></video>
-                    <figcaption class="font-display tracking-[.12em] text-xs text-white/75 absolute bottom-0 left-0 right-0 z-10 px-3 py-2 bg-gradient-to-t from-black/85 to-transparent pointer-events-none">KYBBA</figcaption>
+                    <figcaption class="vcap">DJ KATH X KYBBA</figcaption>
+                </figure>
+                <figure class="vcard aspect-[16/9] col-span-2 sm:col-span-3 lg:col-span-2">
+                    <video class="object-cover" preload="none" controls playsinline poster="img/videos/session-2.jpg"><source src="img/videos/session-2.mp4" type="video/mp4"></video>
+                    <figcaption class="vcap">DJ KATH X SESSION 2</figcaption>
+                </figure>
+                <figure class="vcard aspect-[16/9] col-span-2 sm:col-span-3 lg:col-span-2">
+                    <video class="object-cover" preload="none" controls playsinline poster="img/videos/olas-sonoras.jpg"><source src="img/videos/olas-sonoras.mp4" type="video/mp4"></video>
+                    <figcaption class="vcap">DJ KATH X OLAS SONORAS</figcaption>
                 </figure>
                 <figure class="vcard aspect-[9/16]">
-                    <video class="object-cover" preload="none" controls playsinline poster="img/videos/performance.jpg"><source src="img/videos/performance.mp4" type="video/mp4"></video>
-                    <figcaption class="font-display tracking-[.12em] text-xs text-white/75 absolute bottom-0 left-0 right-0 z-10 px-3 py-2 bg-gradient-to-t from-black/85 to-transparent pointer-events-none">PERFORMANCE</figcaption>
+                    <video class="object-cover" preload="none" controls playsinline poster="img/videos/pool-party.jpg"><source src="img/videos/pool-party.mp4" type="video/mp4"></video>
+                    <figcaption class="vcap">DJ KATH X POOL PARTY</figcaption>
                 </figure>
                 <figure class="vcard aspect-[9/16]">
-                    <video class="object-cover" preload="none" controls playsinline poster="img/videos/set.jpg"><source src="img/videos/set.mp4" type="video/mp4"></video>
-                    <figcaption class="font-display tracking-[.12em] text-xs text-white/75 absolute bottom-0 left-0 right-0 z-10 px-3 py-2 bg-gradient-to-t from-black/85 to-transparent pointer-events-none">SET</figcaption>
+                    <video class="object-cover" preload="none" controls playsinline poster="img/videos/dj-kath-x.jpg"><source src="img/videos/dj-kath-x.mp4" type="video/mp4"></video>
+                    <figcaption class="vcap">DJ KATH X</figcaption>
                 </figure>
                 <figure class="vcard aspect-[9/16]">
-                    <video class="object-cover" preload="none" controls playsinline poster="img/videos/session-1-pool-party.jpg"><source src="img/videos/session-1-pool-party.mp4" type="video/mp4"></video>
-                    <figcaption class="font-display tracking-[.12em] text-xs text-white/75 absolute bottom-0 left-0 right-0 z-10 px-3 py-2 bg-gradient-to-t from-black/85 to-transparent pointer-events-none">SESSION 1 · POOL PARTY</figcaption>
-                </figure>
-                <figure class="vcard aspect-[9/16]">
-                    <video class="object-contain bg-black" preload="none" controls playsinline poster="img/videos/session-2.jpg"><source src="img/videos/session-2.mp4" type="video/mp4"></video>
-                    <figcaption class="font-display tracking-[.12em] text-xs text-white/75 absolute bottom-0 left-0 right-0 z-10 px-3 py-2 bg-gradient-to-t from-black/85 to-transparent pointer-events-none">SESSION 2</figcaption>
+                    <video class="object-cover" preload="none" controls playsinline poster="img/videos/dj-kath-xx.jpg"><source src="img/videos/dj-kath-xx.mp4" type="video/mp4"></video>
+                    <figcaption class="vcap">DJ KATH XX</figcaption>
                 </figure>
             </div>
         </section>
