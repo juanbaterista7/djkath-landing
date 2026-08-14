@@ -3,8 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DJ KATH — Official Website</title>
-    <meta name="description" content="DJ Kath — DJ y directora creativa de Medellín. Afrobeats, Amapiano, Dancehall, Moombahton. In Beats We Trust.">
+    <title>DJ Kath | DJ de Afrobeats y Amapiano en Medellín</title>
+    <meta name="description" content="DJ Kath, DJ y directora creativa de Medellín. Afrobeats, Amapiano, Dancehall y Moombahton. Escucha sus sets y contrátala para tu evento.">
+    <link rel="canonical" href="https://djkath.com/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="DJ Kath">
+    <meta property="og:locale" content="es_CO">
+    <meta property="og:url" content="https://djkath.com/">
+    <meta property="og:title" content="DJ Kath | DJ de Afrobeats y Amapiano en Medellín">
+    <meta property="og:description" content="DJ Kath, DJ y directora creativa de Medellín. Afrobeats, Amapiano, Dancehall y Moombahton. Escucha sus sets y contrátala para tu evento.">
+    <meta property="og:image" content="https://djkath.com/img/og-djkath.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="DJ Kath en cabina">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="DJ Kath | DJ de Afrobeats y Amapiano en Medellín">
+    <meta name="twitter:description" content="DJ Kath, DJ y directora creativa de Medellín. Afrobeats, Amapiano, Dancehall y Moombahton. Escucha sus sets y contrátala para tu evento.">
+    <meta name="twitter:image" content="https://djkath.com/img/og-djkath.jpg">
     <link rel="icon" href="img/logo-kath-amarillo.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -142,6 +157,29 @@
             .eq.on span { animation: none; height: 60%; }
         }
     </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "MusicGroup",
+      "name": "DJ Kath",
+      "alternateName": "Katherine Vargas Pineda",
+      "url": "https://djkath.com/",
+      "image": "https://djkath.com/img/og-djkath.jpg",
+      "logo": "https://djkath.com/img/logo-kath-blanco.png",
+      "description": "DJ y directora creativa de Medellín. Afrobeats, Amapiano, Dancehall y Moombahton.",
+      "genre": ["Afrobeats", "Amapiano", "Dancehall", "Moombahton"],
+      "foundingLocation": { "@type": "Place", "name": "Medellín, Colombia" },
+      "address": { "@type": "PostalAddress", "addressLocality": "Medellín", "addressCountry": "CO" },
+      "email": "booking@djkath.com",
+      "sameAs": [
+        "https://www.instagram.com/djkath____/",
+        "https://www.tiktok.com/@djkath____",
+        "https://www.youtube.com/@DjKathh",
+        "https://open.spotify.com/user/12130058466",
+        "https://soundcloud.com/katherine-vargas-pineda"
+      ]
+    }
+    </script>
 </head>
 <body class="text-white min-h-[100svh] flex flex-col">
 
@@ -196,7 +234,8 @@
     </header>
 
     <main class="flex-1 flex flex-col items-center justify-center px-6 pb-24 text-center">
-        <h1 class="hero-tagline" id="heroTag" aria-label="IN BEATS WE TRUST">IN BEATS WE TRUST</h1>
+        <h1 class="sr-only">DJ Kath — DJ de Afrobeats, Amapiano y Dancehall en Medellín</h1>
+        <div class="hero-tagline" id="heroTag" aria-hidden="true">IN BEATS WE TRUST</div>
 
         <section id="scPlayer" class="w-full max-w-xl mt-8 sm:mt-10" aria-label="Último set">
             <div class="flex items-center gap-4 sm:gap-5 rounded-2xl border border-white/20 bg-black/55 backdrop-blur-md px-5 py-4 sm:px-6 sm:py-5">
