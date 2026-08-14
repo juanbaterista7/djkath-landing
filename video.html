@@ -42,6 +42,32 @@
         .gal-tab:hover { opacity:.85; }
         .gal-tab.active { opacity:1; color:#D4A843; }
         .gal-tab.active::after { content:''; position:absolute; left:0; right:0; bottom:0; height:2px; background:#D4A843; }
+
+        /* Fuerza el recorte redondeado sobre la imagen escalada: sin este mask,
+           Safari/Chromium filtran las esquinas cuadradas por encima del radio. */
+        .gal { -webkit-mask-image: -webkit-radial-gradient(#fff, #000); mask-image: radial-gradient(#fff, #000); }
+
+        /* Marco del video: borde en degradado ambar + halo + esquinas tipo visor */
+        .video-frame {
+            position: relative;
+            padding: 3px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #D4A843 0%, rgba(212,168,67,.25) 35%, rgba(212,168,67,.25) 65%, #D4A843 100%);
+            box-shadow: 0 0 0 1px rgba(0,0,0,.6), 0 18px 60px -18px rgba(212,168,67,.55), 0 0 90px -30px rgba(212,168,67,.45);
+        }
+        .video-frame video { display: block; }
+        .vf-corner { position: absolute; width: 18px; height: 18px; border: 2px solid #D4A843; pointer-events: none; }
+        .vf-tl { top: -7px; left: -7px;  border-right: 0; border-bottom: 0; border-top-left-radius: 6px; }
+        .vf-tr { top: -7px; right: -7px; border-left: 0;  border-bottom: 0; border-top-right-radius: 6px; }
+        .vf-bl { bottom: -7px; left: -7px;  border-right: 0; border-top: 0; border-bottom-left-radius: 6px; }
+        .vf-br { bottom: -7px; right: -7px; border-left: 0;  border-top: 0; border-bottom-right-radius: 6px; }
+        @media (min-width: 640px) {
+            .vf-corner { width: 26px; height: 26px; }
+            .vf-tl, .vf-tr { top: -10px; }
+            .vf-bl, .vf-br { bottom: -10px; }
+            .vf-tl, .vf-bl { left: -10px; }
+            .vf-tr, .vf-br { right: -10px; }
+        }
     </style>
 </head>
 <body class="text-white">
@@ -96,11 +122,15 @@
         <h1 class="font-display text-3xl sm:text-4xl tracking-[.08em] text-amber mb-2">FOTOS Y VIDEO</h1>
         <p class="font-display tracking-[.25em] text-xs text-white/70 mb-10">KATH SESSION</p>
 
-        <div class="border border-white/15 bg-black/40 max-w-4xl mx-auto">
-            <video controls preload="none" poster="img/video-poster.jpg" class="w-full aspect-video bg-black">
+        <div class="video-frame max-w-4xl mx-auto">
+            <video controls preload="none" poster="img/video-poster.jpg" class="w-full aspect-video bg-black rounded-[10px]">
                 <source src="img/kath-session.mp4?v=2" type="video/mp4">
                 Tu navegador no soporta video HTML5.
             </video>
+            <span class="vf-corner vf-tl" aria-hidden="true"></span>
+            <span class="vf-corner vf-tr" aria-hidden="true"></span>
+            <span class="vf-corner vf-bl" aria-hidden="true"></span>
+            <span class="vf-corner vf-br" aria-hidden="true"></span>
         </div>
         <p class="text-white/50 text-sm text-center mt-6">Sesión en vivo · Afrobeats · Amapiano · Dancehall</p>
 
@@ -119,102 +149,102 @@
         <div id="panel-shows" role="tabpanel" aria-labelledby="tab-shows" class="columns-2 sm:columns-3 gap-3 [&>button]:mb-3">
                 <button class="gal group relative block w-full overflow-hidden rounded-lg break-inside-avoid" data-src="img/galeria/show-01-full.webp">
                     <img src="img/galeria/show-01.webp" alt="DJ Kath en vivo" width="600" height="900" loading="lazy" decoding="async" class="w-full transition duration-500 group-hover:scale-105">
-                    <span class="absolute inset-0 ring-1 ring-inset ring-white/10 group-hover:ring-amber/70 transition"></span>
+                    <span class="absolute inset-0 rounded-lg ring-1 ring-inset ring-white/10 group-hover:ring-2 group-hover:ring-amber/80 transition"></span>
                 </button>
                 <button class="gal group relative block w-full overflow-hidden rounded-lg break-inside-avoid" data-src="img/galeria/show-02-full.webp">
                     <img src="img/galeria/show-02.webp" alt="DJ Kath en vivo" width="600" height="900" loading="lazy" decoding="async" class="w-full transition duration-500 group-hover:scale-105">
-                    <span class="absolute inset-0 ring-1 ring-inset ring-white/10 group-hover:ring-amber/70 transition"></span>
+                    <span class="absolute inset-0 rounded-lg ring-1 ring-inset ring-white/10 group-hover:ring-2 group-hover:ring-amber/80 transition"></span>
                 </button>
                 <button class="gal group relative block w-full overflow-hidden rounded-lg break-inside-avoid" data-src="img/galeria/show-03-full.webp">
                     <img src="img/galeria/show-03.webp" alt="DJ Kath en vivo" width="600" height="900" loading="lazy" decoding="async" class="w-full transition duration-500 group-hover:scale-105">
-                    <span class="absolute inset-0 ring-1 ring-inset ring-white/10 group-hover:ring-amber/70 transition"></span>
+                    <span class="absolute inset-0 rounded-lg ring-1 ring-inset ring-white/10 group-hover:ring-2 group-hover:ring-amber/80 transition"></span>
                 </button>
                 <button class="gal group relative block w-full overflow-hidden rounded-lg break-inside-avoid" data-src="img/galeria/show-04-full.webp">
                     <img src="img/galeria/show-04.webp" alt="DJ Kath en vivo" width="600" height="900" loading="lazy" decoding="async" class="w-full transition duration-500 group-hover:scale-105">
-                    <span class="absolute inset-0 ring-1 ring-inset ring-white/10 group-hover:ring-amber/70 transition"></span>
+                    <span class="absolute inset-0 rounded-lg ring-1 ring-inset ring-white/10 group-hover:ring-2 group-hover:ring-amber/80 transition"></span>
                 </button>
                 <button class="gal group relative block w-full overflow-hidden rounded-lg break-inside-avoid" data-src="img/galeria/show-05-full.webp">
                     <img src="img/galeria/show-05.webp" alt="DJ Kath en vivo" width="600" height="900" loading="lazy" decoding="async" class="w-full transition duration-500 group-hover:scale-105">
-                    <span class="absolute inset-0 ring-1 ring-inset ring-white/10 group-hover:ring-amber/70 transition"></span>
+                    <span class="absolute inset-0 rounded-lg ring-1 ring-inset ring-white/10 group-hover:ring-2 group-hover:ring-amber/80 transition"></span>
                 </button>
                 <button class="gal group relative block w-full overflow-hidden rounded-lg break-inside-avoid" data-src="img/galeria/show-06-full.webp">
                     <img src="img/galeria/show-06.webp" alt="DJ Kath en vivo" width="600" height="900" loading="lazy" decoding="async" class="w-full transition duration-500 group-hover:scale-105">
-                    <span class="absolute inset-0 ring-1 ring-inset ring-white/10 group-hover:ring-amber/70 transition"></span>
+                    <span class="absolute inset-0 rounded-lg ring-1 ring-inset ring-white/10 group-hover:ring-2 group-hover:ring-amber/80 transition"></span>
                 </button>
                 <button class="gal group relative block w-full overflow-hidden rounded-lg break-inside-avoid" data-src="img/galeria/show-07-full.webp">
                     <img src="img/galeria/show-07.webp" alt="DJ Kath en vivo" width="600" height="900" loading="lazy" decoding="async" class="w-full transition duration-500 group-hover:scale-105">
-                    <span class="absolute inset-0 ring-1 ring-inset ring-white/10 group-hover:ring-amber/70 transition"></span>
+                    <span class="absolute inset-0 rounded-lg ring-1 ring-inset ring-white/10 group-hover:ring-2 group-hover:ring-amber/80 transition"></span>
                 </button>
                 <button class="gal group relative block w-full overflow-hidden rounded-lg break-inside-avoid" data-src="img/galeria/show-08-full.webp">
                     <img src="img/galeria/show-08.webp" alt="DJ Kath en vivo" width="900" height="600" loading="lazy" decoding="async" class="w-full transition duration-500 group-hover:scale-105">
-                    <span class="absolute inset-0 ring-1 ring-inset ring-white/10 group-hover:ring-amber/70 transition"></span>
+                    <span class="absolute inset-0 rounded-lg ring-1 ring-inset ring-white/10 group-hover:ring-2 group-hover:ring-amber/80 transition"></span>
                 </button>
                 <button class="gal group relative block w-full overflow-hidden rounded-lg break-inside-avoid" data-src="img/galeria/show-09-full.webp">
                     <img src="img/galeria/show-09.webp" alt="DJ Kath en vivo" width="900" height="600" loading="lazy" decoding="async" class="w-full transition duration-500 group-hover:scale-105">
-                    <span class="absolute inset-0 ring-1 ring-inset ring-white/10 group-hover:ring-amber/70 transition"></span>
+                    <span class="absolute inset-0 rounded-lg ring-1 ring-inset ring-white/10 group-hover:ring-2 group-hover:ring-amber/80 transition"></span>
                 </button>
                 <button class="gal group relative block w-full overflow-hidden rounded-lg break-inside-avoid" data-src="img/galeria/show-10-full.webp">
                     <img src="img/galeria/show-10.webp" alt="DJ Kath en vivo" width="900" height="600" loading="lazy" decoding="async" class="w-full transition duration-500 group-hover:scale-105">
-                    <span class="absolute inset-0 ring-1 ring-inset ring-white/10 group-hover:ring-amber/70 transition"></span>
+                    <span class="absolute inset-0 rounded-lg ring-1 ring-inset ring-white/10 group-hover:ring-2 group-hover:ring-amber/80 transition"></span>
                 </button>
                 <button class="gal group relative block w-full overflow-hidden rounded-lg break-inside-avoid" data-src="img/galeria/show-11-full.webp">
                     <img src="img/galeria/show-11.webp" alt="DJ Kath en vivo" width="900" height="600" loading="lazy" decoding="async" class="w-full transition duration-500 group-hover:scale-105">
-                    <span class="absolute inset-0 ring-1 ring-inset ring-white/10 group-hover:ring-amber/70 transition"></span>
+                    <span class="absolute inset-0 rounded-lg ring-1 ring-inset ring-white/10 group-hover:ring-2 group-hover:ring-amber/80 transition"></span>
                 </button>
                 <button class="gal group relative block w-full overflow-hidden rounded-lg break-inside-avoid" data-src="img/galeria/show-12-full.webp">
                     <img src="img/galeria/show-12.webp" alt="DJ Kath en vivo" width="900" height="600" loading="lazy" decoding="async" class="w-full transition duration-500 group-hover:scale-105">
-                    <span class="absolute inset-0 ring-1 ring-inset ring-white/10 group-hover:ring-amber/70 transition"></span>
+                    <span class="absolute inset-0 rounded-lg ring-1 ring-inset ring-white/10 group-hover:ring-2 group-hover:ring-amber/80 transition"></span>
                 </button>
                 <button class="gal group relative block w-full overflow-hidden rounded-lg break-inside-avoid" data-src="img/galeria/show-13-full.webp">
                     <img src="img/galeria/show-13.webp" alt="DJ Kath en vivo" width="605" height="900" loading="lazy" decoding="async" class="w-full transition duration-500 group-hover:scale-105">
-                    <span class="absolute inset-0 ring-1 ring-inset ring-white/10 group-hover:ring-amber/70 transition"></span>
+                    <span class="absolute inset-0 rounded-lg ring-1 ring-inset ring-white/10 group-hover:ring-2 group-hover:ring-amber/80 transition"></span>
                 </button>
                 <button class="gal group relative block w-full overflow-hidden rounded-lg break-inside-avoid" data-src="img/galeria/show-14-full.webp">
                     <img src="img/galeria/show-14.webp" alt="DJ Kath en vivo" width="900" height="596" loading="lazy" decoding="async" class="w-full transition duration-500 group-hover:scale-105">
-                    <span class="absolute inset-0 ring-1 ring-inset ring-white/10 group-hover:ring-amber/70 transition"></span>
+                    <span class="absolute inset-0 rounded-lg ring-1 ring-inset ring-white/10 group-hover:ring-2 group-hover:ring-amber/80 transition"></span>
                 </button>
                 <button class="gal group relative block w-full overflow-hidden rounded-lg break-inside-avoid" data-src="img/galeria/show-15-full.webp">
                     <img src="img/galeria/show-15.webp" alt="DJ Kath en vivo" width="900" height="596" loading="lazy" decoding="async" class="w-full transition duration-500 group-hover:scale-105">
-                    <span class="absolute inset-0 ring-1 ring-inset ring-white/10 group-hover:ring-amber/70 transition"></span>
+                    <span class="absolute inset-0 rounded-lg ring-1 ring-inset ring-white/10 group-hover:ring-2 group-hover:ring-amber/80 transition"></span>
                 </button>
         </div>
 
         <div id="panel-friends" role="tabpanel" aria-labelledby="tab-friends" class="hidden columns-2 sm:columns-3 gap-3 [&>button]:mb-3">
                 <button class="gal group relative block w-full overflow-hidden rounded-lg break-inside-avoid" data-src="img/galeria/amigos-01-full.webp">
                     <img src="img/galeria/amigos-01.webp" alt="DJ Kath con artistas invitados" width="506" height="900" loading="lazy" decoding="async" class="w-full transition duration-500 group-hover:scale-105">
-                    <span class="absolute inset-0 ring-1 ring-inset ring-white/10 group-hover:ring-amber/70 transition"></span>
+                    <span class="absolute inset-0 rounded-lg ring-1 ring-inset ring-white/10 group-hover:ring-2 group-hover:ring-amber/80 transition"></span>
                 </button>
                 <button class="gal group relative block w-full overflow-hidden rounded-lg break-inside-avoid" data-src="img/galeria/amigos-02-full.webp">
                     <img src="img/galeria/amigos-02.webp" alt="DJ Kath con artistas invitados" width="506" height="900" loading="lazy" decoding="async" class="w-full transition duration-500 group-hover:scale-105">
-                    <span class="absolute inset-0 ring-1 ring-inset ring-white/10 group-hover:ring-amber/70 transition"></span>
+                    <span class="absolute inset-0 rounded-lg ring-1 ring-inset ring-white/10 group-hover:ring-2 group-hover:ring-amber/80 transition"></span>
                 </button>
                 <button class="gal group relative block w-full overflow-hidden rounded-lg break-inside-avoid" data-src="img/galeria/amigos-03-full.webp">
                     <img src="img/galeria/amigos-03.webp" alt="DJ Kath con artistas invitados" width="900" height="506" loading="lazy" decoding="async" class="w-full transition duration-500 group-hover:scale-105">
-                    <span class="absolute inset-0 ring-1 ring-inset ring-white/10 group-hover:ring-amber/70 transition"></span>
+                    <span class="absolute inset-0 rounded-lg ring-1 ring-inset ring-white/10 group-hover:ring-2 group-hover:ring-amber/80 transition"></span>
                 </button>
                 <button class="gal group relative block w-full overflow-hidden rounded-lg break-inside-avoid" data-src="img/galeria/amigos-04-full.webp">
                     <img src="img/galeria/amigos-04.webp" alt="DJ Kath con artistas invitados" width="900" height="506" loading="lazy" decoding="async" class="w-full transition duration-500 group-hover:scale-105">
-                    <span class="absolute inset-0 ring-1 ring-inset ring-white/10 group-hover:ring-amber/70 transition"></span>
+                    <span class="absolute inset-0 rounded-lg ring-1 ring-inset ring-white/10 group-hover:ring-2 group-hover:ring-amber/80 transition"></span>
                 </button>
                 <button class="gal group relative block w-full overflow-hidden rounded-lg break-inside-avoid" data-src="img/galeria/amigos-05-full.webp">
                     <img src="img/galeria/amigos-05.webp" alt="DJ Kath con artistas invitados" width="600" height="900" loading="lazy" decoding="async" class="w-full transition duration-500 group-hover:scale-105">
-                    <span class="absolute inset-0 ring-1 ring-inset ring-white/10 group-hover:ring-amber/70 transition"></span>
+                    <span class="absolute inset-0 rounded-lg ring-1 ring-inset ring-white/10 group-hover:ring-2 group-hover:ring-amber/80 transition"></span>
                 </button>
                 <button class="gal group relative block w-full overflow-hidden rounded-lg break-inside-avoid" data-src="img/galeria/amigos-06-full.webp">
                     <img src="img/galeria/amigos-06.webp" alt="DJ Kath con artistas invitados" width="900" height="600" loading="lazy" decoding="async" class="w-full transition duration-500 group-hover:scale-105">
-                    <span class="absolute inset-0 ring-1 ring-inset ring-white/10 group-hover:ring-amber/70 transition"></span>
+                    <span class="absolute inset-0 rounded-lg ring-1 ring-inset ring-white/10 group-hover:ring-2 group-hover:ring-amber/80 transition"></span>
                 </button>
                 <button class="gal group relative block w-full overflow-hidden rounded-lg break-inside-avoid" data-src="img/galeria/amigos-07-full.webp">
                     <img src="img/galeria/amigos-07.webp" alt="DJ Kath con artistas invitados" width="600" height="900" loading="lazy" decoding="async" class="w-full transition duration-500 group-hover:scale-105">
-                    <span class="absolute inset-0 ring-1 ring-inset ring-white/10 group-hover:ring-amber/70 transition"></span>
+                    <span class="absolute inset-0 rounded-lg ring-1 ring-inset ring-white/10 group-hover:ring-2 group-hover:ring-amber/80 transition"></span>
                 </button>
                 <button class="gal group relative block w-full overflow-hidden rounded-lg break-inside-avoid" data-src="img/galeria/amigos-08-full.webp">
                     <img src="img/galeria/amigos-08.webp" alt="DJ Kath con artistas invitados" width="900" height="600" loading="lazy" decoding="async" class="w-full transition duration-500 group-hover:scale-105">
-                    <span class="absolute inset-0 ring-1 ring-inset ring-white/10 group-hover:ring-amber/70 transition"></span>
+                    <span class="absolute inset-0 rounded-lg ring-1 ring-inset ring-white/10 group-hover:ring-2 group-hover:ring-amber/80 transition"></span>
                 </button>
                 <button class="gal group relative block w-full overflow-hidden rounded-lg break-inside-avoid" data-src="img/galeria/amigos-09-full.webp">
                     <img src="img/galeria/amigos-09.webp" alt="DJ Kath con artistas invitados" width="900" height="601" loading="lazy" decoding="async" class="w-full transition duration-500 group-hover:scale-105">
-                    <span class="absolute inset-0 ring-1 ring-inset ring-white/10 group-hover:ring-amber/70 transition"></span>
+                    <span class="absolute inset-0 rounded-lg ring-1 ring-inset ring-white/10 group-hover:ring-2 group-hover:ring-amber/80 transition"></span>
                 </button>
         </div>
     </main>
