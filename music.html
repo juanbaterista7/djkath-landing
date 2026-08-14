@@ -32,6 +32,16 @@
         #drawer .social-icon svg { width: 24px; height: 24px; }
         ::-webkit-scrollbar { width:4px; } ::-webkit-scrollbar-track { background:#0F0F0F; } ::-webkit-scrollbar-thumb { background:#D4A843; border-radius:2px; }
             #drawer .nav-link{font-size:1.25rem;}
+
+        /* Mismo marco ambar que el video de video.html */
+        .media-frame {
+            position: relative;
+            padding: 3px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #D4A843 0%, rgba(212,168,67,.25) 35%, rgba(212,168,67,.25) 65%, #D4A843 100%);
+            box-shadow: 0 0 0 1px rgba(0,0,0,.6), 0 14px 44px -16px rgba(212,168,67,.5);
+        }
+        .media-frame iframe { display: block; border-radius: 9px; background: #121212; }
     </style>
 </head>
 <body class="text-white">
@@ -86,16 +96,53 @@
         <h1 class="font-display text-3xl sm:text-4xl tracking-[.08em] text-amber mb-2">MUSIC</h1>
         <p class="font-display tracking-[.25em] text-xs text-white/70 mb-10">SETS & MIXES</p>
 
-        <!-- PLACEHOLDER: pegar el código embed real (SoundCloud/Spotify) dentro de cada bloque -->
-        <div class="space-y-6">
-            <div class="border border-white/15 bg-black/40 backdrop-blur-sm p-6 text-center">
-                <p class="font-display tracking-[.18em] text-white/80 mb-2">SOUNDCLOUD</p>
-                <p class="text-white/50 text-sm">Embed pendiente — pega aquí el iframe de SoundCloud.</p>
-            </div>
-            <div class="border border-white/15 bg-black/40 backdrop-blur-sm p-6 text-center">
-                <p class="font-display tracking-[.18em] text-white/80 mb-2">SPOTIFY</p>
-                <p class="text-white/50 text-sm">Embed pendiente — pega aquí el iframe de Spotify.</p>
-            </div>
+        <div class="space-y-10">
+            <section>
+                <div class="flex items-center gap-3 mb-4">
+                    <p class="font-display tracking-[.22em] text-sm text-amber">ÚLTIMO SET</p>
+                    <span class="h-px flex-1 bg-white/15"></span>
+                </div>
+                <div class="media-frame">
+                    <iframe title="Amapiano &amp; Afrobeats en SoundCloud" width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay"
+                        src="https://w.soundcloud.com/player/?url=https%3A%2F%2Fsoundcloud.com%2Fkatherine-vargas-pineda%2Famapiano-afrobeats&color=%23D4A843&hide_related=true&show_comments=false&show_user=true&show_teaser=false&visual=false"></iframe>
+                </div>
+            </section>
+
+            <section>
+                <div class="flex items-center gap-3 mb-4">
+                    <p class="font-display tracking-[.22em] text-sm text-amber">TODOS LOS SETS</p>
+                    <span class="h-px flex-1 bg-white/15"></span>
+                </div>
+                <div class="media-frame">
+                    <iframe title="DJ Kath en SoundCloud" width="100%" height="450" scrolling="no" frameborder="no" allow="autoplay"
+                        src="https://w.soundcloud.com/player/?url=https%3A%2F%2Fsoundcloud.com%2Fkatherine-vargas-pineda&color=%23D4A843&hide_related=true&show_comments=false&show_user=true&show_teaser=false&visual=false"></iframe>
+                </div>
+            </section>
+
+            <section>
+                <div class="flex items-center gap-3 mb-4">
+                    <p class="font-display tracking-[.22em] text-sm text-amber">EN OTRAS PLATAFORMAS</p>
+                    <span class="h-px flex-1 bg-white/15"></span>
+                </div>
+                <div class="grid sm:grid-cols-2 gap-4">
+                    <a href="https://open.spotify.com/user/12130058466" target="_blank" rel="noopener"
+                       class="plat-card group flex items-center gap-4 border border-white/15 bg-black/40 backdrop-blur-sm px-5 py-4 transition hover:border-amber/70 hover:bg-black/55">
+                        <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor" class="shrink-0 text-white/70 group-hover:text-amber transition"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.84-.179-.96-.6-.122-.42.18-.84.6-.96 4.561-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+                        <span>
+                            <span class="block font-display tracking-[.18em] text-sm text-white group-hover:text-amber transition">SPOTIFY</span>
+                            <span class="block text-white/50 text-sm">Playlists y rotación</span>
+                        </span>
+                    </a>
+                    <a href="https://www.youtube.com/@DjKathh" target="_blank" rel="noopener"
+                       class="plat-card group flex items-center gap-4 border border-white/15 bg-black/40 backdrop-blur-sm px-5 py-4 transition hover:border-amber/70 hover:bg-black/55">
+                        <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor" class="shrink-0 text-white/70 group-hover:text-amber transition"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                        <span>
+                            <span class="block font-display tracking-[.18em] text-sm text-white group-hover:text-amber transition">YOUTUBE</span>
+                            <span class="block text-white/50 text-sm">Sets grabados en video</span>
+                        </span>
+                    </a>
+                </div>
+            </section>
         </div>
 
         <p class="text-white/50 text-sm text-center mt-10">Más mezclas pronto. Sígueme en <a href="https://www.instagram.com/djkath____/" target="_blank" rel="noopener" class="text-amber hover:text-warm">Instagram</a> y <a href="https://www.tiktok.com/@djkath____" target="_blank" rel="noopener" class="text-amber hover:text-warm">TikTok</a>.</p>
