@@ -89,9 +89,24 @@
         .hero-tagline span.lit {
             animation: letterLight 1.8s ease-in-out;
         }
+        /* En modo beat el destello es mas corto y fuerte, y dura un compas */
+        .hero-tagline span.lit.beat {
+            animation: letterBeat var(--beat, 536ms) ease-out;
+        }
+        .hero-tagline span.lit.beat.accent {
+            animation: letterAccent var(--beat, 536ms) ease-out;
+        }
         @keyframes letterLight {
             0% { color: #b8902f; text-shadow: none; }
             40% { color: #fff6da; text-shadow: 0 0 22px rgba(255,243,207,.9), 0 0 8px rgba(255,255,255,.85); }
+            100% { color: #b8902f; text-shadow: none; }
+        }
+        @keyframes letterBeat {
+            0% { color: #fff6da; text-shadow: 0 0 26px rgba(255,243,207,.95), 0 0 10px rgba(255,255,255,.9); }
+            100% { color: #b8902f; text-shadow: none; }
+        }
+        @keyframes letterAccent {
+            0% { color: #fffdf5; text-shadow: 0 0 40px rgba(255,243,207,1), 0 0 16px rgba(255,255,255,.95); }
             100% { color: #b8902f; text-shadow: none; }
         }
         @keyframes riseIn { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
@@ -106,9 +121,25 @@
         #scBar { position: relative; }
         #scBar::before { content: ''; position: absolute; inset: -8px 0; }
         #scFill { transition: width .2s linear; }
+
+        /* Ecualizador: barras al mismo pulso que el brillo del titular */
+        .eq { display: inline-flex; align-items: flex-end; gap: 3px; height: 14px; opacity: 0; transition: opacity .35s; }
+        .eq.on { opacity: 1; }
+        .eq span { display: block; width: 3px; height: 22%; border-radius: 1px; background: #D4A843; }
+        .eq.on span { animation: eqBar var(--beat, 536ms) ease-in-out infinite; }
+        .eq.on span:nth-child(1) { animation-duration: calc(var(--beat, 536ms) * 1);   animation-delay: 0ms; }
+        .eq.on span:nth-child(2) { animation-duration: calc(var(--beat, 536ms) / 2);   animation-delay: 60ms; }
+        .eq.on span:nth-child(3) { animation-duration: calc(var(--beat, 536ms) * 1);   animation-delay: 120ms; }
+        .eq.on span:nth-child(4) { animation-duration: calc(var(--beat, 536ms) / 2);   animation-delay: 30ms; }
+        .eq.on span:nth-child(5) { animation-duration: calc(var(--beat, 536ms) * .75); animation-delay: 90ms; }
+        @keyframes eqBar {
+            0%, 100% { height: 22%; }
+            50%      { height: 100%; }
+        }
         @media (prefers-reduced-motion: reduce) {
             #scPlayer { animation: none; }
             #scToggle, #scFill { transition: none; }
+            .eq.on span { animation: none; height: 60%; }
         }
     </style>
 </head>
@@ -174,7 +205,10 @@
                     <svg id="scIconPause" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="hidden"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
                 </button>
                 <div class="flex-1 min-w-0 text-left">
-                    <p class="font-display tracking-[.22em] text-[.78rem] leading-none text-amber">ÚLTIMO SET</p>
+                    <div class="flex items-center gap-3">
+                        <p class="font-display tracking-[.22em] text-[.78rem] leading-none text-amber">ÚLTIMO SET</p>
+                        <div id="scEq" class="eq" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+                    </div>
                     <p id="scTitle" class="truncate text-lg sm:text-xl text-white mt-1.5">Amapiano &amp; Afrobeats</p>
                     <div id="scBar" role="progressbar" aria-label="Progreso" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" class="mt-3 h-[4px] w-full rounded bg-white/25 cursor-pointer">
                         <div id="scFill" class="h-full w-0 rounded bg-amber"></div>
@@ -231,7 +265,7 @@
             }
           });
           letters.forEach(function(sp){
-            sp.addEventListener('animationend', function(){ sp.classList.remove('lit'); });
+            sp.addEventListener('animationend', function(){ sp.classList.remove('lit','beat','accent'); });
           });
           var queue=[];
           function refill(){
@@ -240,13 +274,41 @@
               var k=Math.floor(Math.random()*(j+1)), t=queue[j]; queue[j]=queue[k]; queue[k]=t;
             }
           }
-          function tick(){
+          function flash(cls){
             if(!queue.length) refill();
             var sp=queue.shift();
-            sp.classList.remove('lit'); void sp.offsetWidth; sp.classList.add('lit');
+            sp.classList.remove('lit','beat','accent'); void sp.offsetWidth;
+            sp.classList.add('lit');
+            if(cls) sp.classList.add.apply(sp.classList, cls);
           }
+          function tick(){ flash(null); }
+
+          // Modo ambiente (sin musica): un destello lento y aleatorio
+          var timer=setInterval(tick, step), beatCount=0;
           refill(); tick();
-          setInterval(tick, step);
+
+          // Modo beat: pulso a BPM fijo, acento en el tiempo 1 de cada compas 4/4.
+          // No es deteccion real de audio — SoundCloud va en un iframe cross-origin
+          // y Web Audio no puede analizar ese stream.
+          window.heroPulse = {
+            start: function(beatMs){
+              clearInterval(timer); beatCount=0;
+              tag.style.setProperty('--beat', beatMs+'ms');
+              function beat(){
+                var accent=(beatCount % 4 === 0);
+                flash(accent ? ['beat','accent'] : ['beat']);
+                if(accent) flash(['beat','accent']);
+                else if(beatCount % 2 === 1) flash(['beat']);
+                beatCount++;
+              }
+              beat();
+              timer=setInterval(beat, beatMs);
+            },
+            stop: function(){
+              clearInterval(timer);
+              timer=setInterval(tick, step);
+            }
+          };
         }
       })();
     </script>
@@ -260,6 +322,9 @@
           if(box) box.remove();
           return;
         }
+        // Tempo del set. Ajustar aqui si el mixtape cambia de genero/BPM.
+        var BPM=112, BEAT_MS=Math.round(60000/BPM);
+
         var widget=SC.Widget(frame),
             btn=document.getElementById('scToggle'),
             iPlay=document.getElementById('scIconPlay'),
@@ -268,7 +333,10 @@
             bar=document.getElementById('scBar'),
             fill=document.getElementById('scFill'),
             time=document.getElementById('scTime'),
+            eq=document.getElementById('scEq'),
             duration=0, playing=false;
+
+        if(eq) eq.style.setProperty('--beat', BEAT_MS+'ms');
 
         function fmt(ms){
           var s=Math.max(0,Math.floor(ms/1000)), m=Math.floor(s/60);
@@ -279,6 +347,8 @@
           iPlay.classList.toggle('hidden', on);
           iPause.classList.toggle('hidden', !on);
           btn.setAttribute('aria-label', on ? 'Pausar último set' : 'Reproducir último set');
+          if(eq) eq.classList.toggle('on', on);
+          if(window.heroPulse) on ? window.heroPulse.start(BEAT_MS) : window.heroPulse.stop();
         }
 
         widget.bind(SC.Widget.Events.READY, function(){
