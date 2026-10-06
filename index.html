@@ -21,28 +21,11 @@
     <meta name="twitter:title" content="DJ Kath | DJ de Afrobeats y Amapiano en Medellín">
     <meta name="twitter:description" content="DJ Kath, DJ y directora creativa de Medellín. Afrobeats, Amapiano, Dancehall y Moombahton. Escucha sus sets y contrátala para tu evento.">
     <meta name="twitter:image" content="https://djkath.com/img/og-djkath.jpg">
-    <link rel="icon" href="img/logo-kath-amarillo.png">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Antonio:wght@200;300;400;500&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        amber: '#D4A843',
-                        warm: '#F97316',
-                        ink: '#0F0F0F',
-                    },
-                    fontFamily: {
-                        display: ['Bebas Neue', 'system-ui', 'sans-serif'],
-                        body: ['Antonio', 'system-ui', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
+    <link rel="icon" href="img/favicon.png" type="image/png">
+    <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+    <link rel="preload" href="fonts/bebas-neue-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/antonio-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="assets/app.css">
     <style>
         body { font-family: 'Antonio', system-ui, sans-serif; font-weight: 300; background: #0F0F0F; }
         html { scroll-behavior: smooth; }
@@ -282,10 +265,10 @@
                         <div id="scFill" class="h-full w-0 rounded bg-amber"></div>
                     </div>
                 </div>
-                <span id="scTime" class="shrink-0 text-sm sm:text-base text-white/70 tabular-nums">0:00</span>
+                <span id="scTime" class="shrink-0 text-sm sm:text-base text-white/70 tabular-nums">55:47</span>
             </div>
             <iframe id="scFrame" title="Reproductor SoundCloud" allow="autoplay"
-                src="https://w.soundcloud.com/player/?url=https%3A%2F%2Fsoundcloud.com%2Fkatherine-vargas-pineda%2Famapiano-afrobeats&color=%23D4A843&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_teaser=false&visual=false"></iframe>
+                data-src="https://w.soundcloud.com/player/?url=https%3A%2F%2Fsoundcloud.com%2Fkatherine-vargas-pineda%2Famapiano-afrobeats&color=%23D4A843&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_teaser=false&visual=false"></iframe>
         </section>
     </main>
 
@@ -381,19 +364,14 @@
       })();
     </script>
 
-    <script src="https://w.soundcloud.com/player/api.js"></script>
     <script>
       (function(){
         var frame=document.getElementById('scFrame');
-        if(!frame || typeof SC==='undefined'){
-          var box=document.getElementById('scPlayer');
-          if(box) box.remove();
-          return;
-        }
+        if(!frame) return;
         // Tempo del set. Ajustar aqui si el mixtape cambia de genero/BPM.
         var BPM=112, BEAT_MS=Math.round(60000/BPM);
 
-        var widget=SC.Widget(frame),
+        var widget=null, ready=false, wantPlay=false, loading=false,
             btn=document.getElementById('scToggle'),
             iPlay=document.getElementById('scIconPlay'),
             iPause=document.getElementById('scIconPause'),
@@ -419,28 +397,51 @@
           if(window.heroPulse) on ? window.heroPulse.start(BEAT_MS) : window.heroPulse.stop();
         }
 
-        widget.bind(SC.Widget.Events.READY, function(){
-          widget.getCurrentSound(function(sound){
-            if(sound && sound.title) title.textContent=sound.title;
-          });
-          widget.getDuration(function(ms){ duration=ms; time.textContent=fmt(ms); });
-        });
-        widget.bind(SC.Widget.Events.PLAY, function(){ setPlaying(true); });
-        widget.bind(SC.Widget.Events.PAUSE, function(){ setPlaying(false); });
-        widget.bind(SC.Widget.Events.FINISH, function(){
-          setPlaying(false); fill.style.width='0%'; bar.setAttribute('aria-valuenow','0');
-          time.textContent=fmt(duration);
-        });
-        widget.bind(SC.Widget.Events.PLAY_PROGRESS, function(e){
-          var pct=Math.round((e.relativePosition||0)*100);
-          fill.style.width=pct+'%';
-          bar.setAttribute('aria-valuenow', pct);
-          time.textContent=fmt(e.currentPosition);
-        });
+        // El widget de SoundCloud pesa ~1,2 MB: se carga cuando la página ya terminó,
+        // o antes si la persona toca play.
+        function loadPlayer(){
+          if(loading) return;
+          loading=true;
+          var api=document.createElement('script');
+          api.src='https://w.soundcloud.com/player/api.js';
+          api.onload=function(){ frame.src=frame.dataset.src; widget=SC.Widget(frame); bindWidget(); };
+          api.onerror=function(){ var box=document.getElementById('scPlayer'); if(box) box.remove(); };
+          document.head.appendChild(api);
+        }
+        function whenIdle(){
+          setTimeout(function(){ (window.requestIdleCallback||setTimeout)(loadPlayer, {timeout:3000}); }, 1500);
+        }
+        if(document.readyState==='complete') whenIdle(); else window.addEventListener('load', whenIdle);
 
-        btn.addEventListener('click', function(){ widget.toggle(); });
+        function bindWidget(){
+          widget.bind(SC.Widget.Events.READY, function(){
+            ready=true;
+            if(wantPlay) widget.play();
+            widget.getCurrentSound(function(sound){
+              if(sound && sound.title) title.textContent=sound.title;
+            });
+            widget.getDuration(function(ms){ duration=ms; time.textContent=fmt(ms); });
+          });
+          widget.bind(SC.Widget.Events.PLAY, function(){ setPlaying(true); });
+          widget.bind(SC.Widget.Events.PAUSE, function(){ setPlaying(false); });
+          widget.bind(SC.Widget.Events.FINISH, function(){
+            setPlaying(false); fill.style.width='0%'; bar.setAttribute('aria-valuenow','0');
+            time.textContent=fmt(duration);
+          });
+          widget.bind(SC.Widget.Events.PLAY_PROGRESS, function(e){
+            var pct=Math.round((e.relativePosition||0)*100);
+            fill.style.width=pct+'%';
+            bar.setAttribute('aria-valuenow', pct);
+            time.textContent=fmt(e.currentPosition);
+          });
+        }
+
+        btn.addEventListener('click', function(){
+          if(!ready){ wantPlay=true; loadPlayer(); return; }
+          widget.toggle();
+        });
         bar.addEventListener('click', function(ev){
-          if(!duration) return;
+          if(!ready || !duration) return;
           var r=bar.getBoundingClientRect();
           widget.seekTo(Math.min(1,Math.max(0,(ev.clientX-r.left)/r.width))*duration);
         });
