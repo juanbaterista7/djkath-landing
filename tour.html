@@ -25,7 +25,7 @@
     <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
     <link rel="preload" href="fonts/bebas-neue-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="fonts/antonio-latin.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="assets/app.css">
+    <link rel="stylesheet" href="assets/app.css?v=2">
     <style>
         body { font-family:'Antonio',system-ui,sans-serif; font-weight:300; background:#0F0F0F; }
         html { scroll-behavior:smooth; }
@@ -47,6 +47,16 @@
         .tour-date { flex-shrink:0; }
         .tour-day { font-family:'Bebas Neue',system-ui,sans-serif; color:#D4A843; font-size:1.3rem; line-height:1; letter-spacing:.09em; }
         .tour-weekday { color:rgba(255,255,255,.45); font-size:.68rem; text-transform:uppercase; letter-spacing:.18em; margin-top:.3rem; }
+        /* Fechas ya realizadas: atenuadas y tachadas con un trazo de brocha (la clase .past la pone el script según la fecha).
+           Cuatro trazos distintos que se alternan para que no se vean todos iguales. */
+        .tour-row.past { position:relative; overflow:hidden; }
+        .tour-row.past > * { opacity:.6; }
+        .tour-row.past::after { content:''; position:absolute; background:center/100% 100% no-repeat; opacity:.5; pointer-events:none; }
+        .tour-row.past:nth-child(4n+1)::after { left:0; right:1%; top:50%; height:10px; transform:translateY(-50%) rotate(-.6deg); background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 40' preserveAspectRatio='none'%3E%3Cfilter id='r' x='-5%25' y='-50%25' width='110%25' height='200%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.2 0.6' numOctaves='3' seed='4' result='n'/%3E%3CfeDisplacementMap in='SourceGraphic' in2='n' scale='9' xChannelSelector='R' yChannelSelector='G' result='d'/%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.015 0.5' numOctaves='3' seed='11' result='h'/%3E%3CfeColorMatrix in='h' type='matrix' values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -14 8.6' result='m'/%3E%3CfeComposite in='d' in2='m' operator='in'/%3E%3C/filter%3E%3Cpath filter='url%28%23r%29' fill='white' d='M3 9 C120 5 260 11 400 7 S560 8 597 10 L595 32 C470 35 330 29 200 33 S60 31 5 31 Z'/%3E%3C/svg%3E"); }
+        .tour-row.past:nth-child(4n+2)::after { left:3%; right:0; top:46%; height:8px; transform:translateY(-50%) rotate(.8deg); background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 40' preserveAspectRatio='none'%3E%3Cfilter id='r' x='-5%25' y='-50%25' width='110%25' height='200%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.2 0.6' numOctaves='3' seed='7' result='n'/%3E%3CfeDisplacementMap in='SourceGraphic' in2='n' scale='9' xChannelSelector='R' yChannelSelector='G' result='d'/%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.015 0.5' numOctaves='3' seed='23' result='h'/%3E%3CfeColorMatrix in='h' type='matrix' values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -14 8.6' result='m'/%3E%3CfeComposite in='d' in2='m' operator='in'/%3E%3C/filter%3E%3Cpath filter='url%28%23r%29' fill='white' d='M2 13 C90 8 220 6 360 10 S540 14 598 6 L596 27 C500 34 380 30 250 33 S90 35 4 30 Z'/%3E%3C/svg%3E"); }
+        .tour-row.past:nth-child(4n+3)::after { left:1%; right:6%; top:55%; height:11px; transform:translateY(-50%) rotate(-1.1deg); background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 40' preserveAspectRatio='none'%3E%3Cfilter id='r' x='-5%25' y='-50%25' width='110%25' height='200%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.2 0.6' numOctaves='3' seed='2' result='n'/%3E%3CfeDisplacementMap in='SourceGraphic' in2='n' scale='9' xChannelSelector='R' yChannelSelector='G' result='d'/%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.015 0.5' numOctaves='3' seed='31' result='h'/%3E%3CfeColorMatrix in='h' type='matrix' values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -14 8.6' result='m'/%3E%3CfeComposite in='d' in2='m' operator='in'/%3E%3C/filter%3E%3Cpath filter='url%28%23r%29' fill='white' d='M6 6 C140 10 280 4 420 9 S570 11 594 12 L590 29 C450 31 300 36 180 31 S50 28 3 34 Z'/%3E%3C/svg%3E"); }
+        .tour-row.past:nth-child(4n+4)::after { left:0; right:3%; top:48%; height:9px; transform:translateY(-50%) rotate(.4deg); background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 40' preserveAspectRatio='none'%3E%3Cfilter id='r' x='-5%25' y='-50%25' width='110%25' height='200%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.2 0.6' numOctaves='3' seed='13' result='n'/%3E%3CfeDisplacementMap in='SourceGraphic' in2='n' scale='9' xChannelSelector='R' yChannelSelector='G' result='d'/%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.015 0.5' numOctaves='3' seed='5' result='h'/%3E%3CfeColorMatrix in='h' type='matrix' values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -14 8.6' result='m'/%3E%3CfeComposite in='d' in2='m' operator='in'/%3E%3C/filter%3E%3Cpath filter='url%28%23r%29' fill='white' d='M4 11 C100 14 240 8 380 6 S550 9 597 13 L597 30 C480 28 350 33 220 29 S70 34 2 28 Z'/%3E%3C/svg%3E"); }
+        .tour-row.past:hover { background:none; }
         @media (min-width:640px) {
             .tour-row { flex-direction:row; align-items:center; gap:1.5rem; }
             .tour-date { width:6.5rem; }
@@ -138,7 +148,7 @@
 
     <main class="max-w-3xl mx-auto px-6 py-14">
         <h1 class="font-display text-3xl sm:text-4xl tracking-[.08em] text-amber mb-2">TOUR<span class="sr-only"> — próximas fechas de DJ Kath</span></h1>
-        <p class="font-display tracking-[.25em] text-xs text-white/70 mb-10">PRÓXIMAS FECHAS</p>
+        <p class="font-display tracking-[.18em] text-xl sm:text-2xl text-white mb-10">NEW DATES COMING SOON!</p>
 
         <section class="mb-14">
             <div class="flex items-baseline gap-3 mb-4">
@@ -146,7 +156,7 @@
                 <span class="font-display tracking-[.22em] text-xs text-amber">COLOMBIA</span>
             </div>
             <ul class="divide-y divide-white/10 border-t border-white/10">
-                <li class="tour-row">
+                <li class="tour-row" data-date="2026-08-08">
                     <div class="tour-date">
                         <p class="tour-day">08 AGO</p>
                         <p class="tour-weekday">Sábado</p>
@@ -156,7 +166,7 @@
                         <p class="text-white/60 text-sm">Morena Vice</p>
                     </div>
                 </li>
-                <li class="tour-row">
+                <li class="tour-row" data-date="2026-08-14">
                     <div class="tour-date">
                         <p class="tour-day">14 AGO</p>
                         <p class="tour-weekday">Viernes</p>
@@ -166,7 +176,7 @@
                         <p class="text-white/60 text-sm">50/50</p>
                     </div>
                 </li>
-                <li class="tour-row">
+                <li class="tour-row" data-date="2026-08-15">
                     <div class="tour-date">
                         <p class="tour-day">15 AGO</p>
                         <p class="tour-weekday">Sábado</p>
@@ -176,7 +186,7 @@
                         <p class="text-white/60 text-sm">La House del Barrio</p>
                     </div>
                 </li>
-                <li class="tour-row">
+                <li class="tour-row" data-date="2026-08-16">
                     <div class="tour-date">
                         <p class="tour-day">16 AGO</p>
                         <p class="tour-weekday">Domingo</p>
@@ -195,7 +205,7 @@
                 <span class="font-display tracking-[.22em] text-xs text-amber">AGO · SEP</span>
             </div>
             <ul class="divide-y divide-white/10 border-t border-white/10">
-                <li class="tour-row">
+                <li class="tour-row" data-date="2026-08-21">
                     <div class="tour-date">
                         <p class="tour-day">21 AGO</p>
                         <p class="tour-weekday">Viernes</p>
@@ -205,7 +215,7 @@
                         <p class="text-white/60 text-sm">Stintino</p>
                     </div>
                 </li>
-                <li class="tour-row">
+                <li class="tour-row" data-date="2026-08-22">
                     <div class="tour-date">
                         <p class="tour-day">22 AGO</p>
                         <p class="tour-weekday">Sábado</p>
@@ -215,7 +225,7 @@
                         <p class="text-white/60 text-sm">Stintino</p>
                     </div>
                 </li>
-                <li class="tour-row">
+                <li class="tour-row" data-date="2026-08-23">
                     <div class="tour-date">
                         <p class="tour-day">23 AGO</p>
                         <p class="tour-weekday">Domingo</p>
@@ -225,7 +235,7 @@
                         <p class="text-white/60 text-sm">Sassari</p>
                     </div>
                 </li>
-                <li class="tour-row">
+                <li class="tour-row" data-date="2026-08-26">
                     <div class="tour-date">
                         <p class="tour-day">26 AGO</p>
                         <p class="tour-weekday">Miércoles</p>
@@ -235,7 +245,7 @@
                         <p class="text-white/60 text-sm">Stintino</p>
                     </div>
                 </li>
-                <li class="tour-row">
+                <li class="tour-row" data-date="2026-08-27">
                     <div class="tour-date">
                         <p class="tour-day">27 AGO</p>
                         <p class="tour-weekday">Jueves</p>
@@ -245,7 +255,7 @@
                         <p class="text-white/60 text-sm">Sassari</p>
                     </div>
                 </li>
-                <li class="tour-row">
+                <li class="tour-row" data-date="2026-08-28">
                     <div class="tour-date">
                         <p class="tour-day">28 AGO</p>
                         <p class="tour-weekday">Viernes</p>
@@ -254,7 +264,7 @@
                         <p class="text-white/50 font-medium">Por confirmar</p>
                     </div>
                 </li>
-                <li class="tour-row">
+                <li class="tour-row" data-date="2026-08-29">
                     <div class="tour-date">
                         <p class="tour-day">29 AGO</p>
                         <p class="tour-weekday">Sábado</p>
@@ -264,7 +274,7 @@
                         <p class="text-white/60 text-sm">Porto Ferro</p>
                     </div>
                 </li>
-                <li class="tour-row">
+                <li class="tour-row" data-date="2026-08-30">
                     <div class="tour-date">
                         <p class="tour-day">30 AGO</p>
                         <p class="tour-weekday">Domingo</p>
@@ -274,7 +284,7 @@
                         <p class="text-white/60 text-sm">Porto Torres</p>
                     </div>
                 </li>
-                <li class="tour-row">
+                <li class="tour-row" data-date="2026-09-03">
                     <div class="tour-date">
                         <p class="tour-day">03 SEP</p>
                         <p class="tour-weekday">Jueves</p>
@@ -284,7 +294,7 @@
                         <p class="text-white/60 text-sm">Stintino</p>
                     </div>
                 </li>
-                <li class="tour-row">
+                <li class="tour-row" data-date="2026-09-04">
                     <div class="tour-date">
                         <p class="tour-day">04 SEP</p>
                         <p class="tour-weekday">Viernes</p>
@@ -294,7 +304,7 @@
                         <p class="text-white/60 text-sm">Ancona</p>
                     </div>
                 </li>
-                <li class="tour-row">
+                <li class="tour-row" data-date="2026-09-05">
                     <div class="tour-date">
                         <p class="tour-day">05 SEP</p>
                         <p class="tour-weekday">Sábado</p>
@@ -304,7 +314,7 @@
                         <p class="text-white/60 text-sm">Bisenti (TE)</p>
                     </div>
                 </li>
-                <li class="tour-row">
+                <li class="tour-row" data-date="2026-09-06">
                     <div class="tour-date">
                         <p class="tour-day">06 SEP</p>
                         <p class="tour-weekday">Domingo</p>
@@ -341,6 +351,15 @@
       document.querySelectorAll('header .nav-link').forEach(function(a){
         a.innerHTML='<span class="fw">'+a.innerHTML.trim()+'</span>';
       });
+    </script>
+    <script>
+      // Marca como realizadas las fechas anteriores a hoy (data-date en formato AAAA-MM-DD)
+      (function(){
+        var d=new Date(),hoy=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+        document.querySelectorAll('.tour-row[data-date]').forEach(function(li){
+          if(li.dataset.date<hoy) li.classList.add('past');
+        });
+      })();
     </script>
 </body>
 </html>
