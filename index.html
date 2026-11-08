@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script>try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches){var d=document.documentElement;d.classList.add('intro');sessionStorage.setItem('kathIntro','1');document.addEventListener('DOMContentLoaded',function(){var i=document.querySelector('header > a > img'),go=function(){d.classList.add('go')};if(!i||i.complete)return go();i.addEventListener('load',go);i.addEventListener('error',go);setTimeout(go,2000)})}}catch(e){}</script>
+    <script>try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches){var d=document.documentElement;d.classList.add('intro');sessionStorage.setItem('kathIntro','1');var n=2,go=function(){if(--n<=0)d.classList.add('go')},b=new Image();b.onload=b.onerror=go;b.src='img/bg-home.webp';document.addEventListener('DOMContentLoaded',function(){var i=document.querySelector('header > a > img');if(!i||i.complete)go();else{i.addEventListener('load',go);i.addEventListener('error',go)}setTimeout(function(){d.classList.add('go')},2000)})}}catch(e){}</script>
     <title>DJ Kath | DJ de Afrobeats y Amapiano en Medellín</title>
     <meta name="description" content="DJ Kath, DJ y directora creativa de Medellín. Afrobeats, Amapiano, Dancehall y Moombahton. Escucha sus sets y contrátala para tu evento.">
     <link rel="canonical" href="https://djkath.com/">
@@ -149,7 +149,7 @@
         }
         @keyframes kRise { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: none; } }
         @keyframes kLine { from { transform: scaleX(0); } to { transform: scaleX(1); } }
-        html.intro:not(.go) header *, html.intro:not(.go) #menuBtn, html.intro:not(.go) .hero-tagline, html.intro:not(.go) #scPlayer { animation-play-state: paused !important; }
+        html.intro:not(.go) .page-bg, html.intro:not(.go) .sun-glow, html.intro:not(.go) header *, html.intro:not(.go) #menuBtn, html.intro:not(.go) .hero-tagline, html.intro:not(.go) #scPlayer { animation-play-state: paused !important; }
         html.intro header .social-icon { animation: kDrop .7s cubic-bezier(.16, 1, .3, 1) backwards; }
         html.intro header .social-icon:nth-child(1) { animation-delay: .15s; }
         html.intro header .social-icon:nth-child(2) { animation-delay: .24s; }
@@ -176,6 +176,34 @@
         }
         @media (prefers-reduced-motion: no-preference) {
             header .nav-link .fw { transition: transform .55s cubic-bezier(.65, 0, .35, 1); }
+        }
+
+        /* Amanecer: el fondo entra como un sol que sale. --cx/--cy/--r ubican el disco de la foto
+           en pantalla (los calcula un script junto a .page-bg). */
+        .page-bg { transform-origin: var(--cx, 50%) var(--cy, 50%); }
+        @keyframes sunRise {
+            0%   { clip-path: circle(0px at var(--cx) var(--cy)); transform: scale(1.14); filter: brightness(.35) saturate(.5); }
+            62%  { clip-path: circle(var(--r) at var(--cx) var(--cy)); filter: brightness(1.18) saturate(1.1); }
+            100% { clip-path: circle(150vmax at var(--cx) var(--cy)); transform: scale(1); filter: brightness(1) saturate(1); }
+        }
+        html.intro .page-bg { animation: sunRise 1.9s cubic-bezier(.6, 0, .2, 1) backwards; }
+
+        /* Halo alrededor del sol: respira en reposo y late con la música */
+        .sun-glow {
+            position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: .45;
+            background: radial-gradient(circle calc(var(--r, 50vw) * 1.3) at var(--cx, 50%) var(--cy, 50%),
+                rgba(255,170,90,.16) 0%, rgba(255,120,40,.08) 58%, rgba(255,110,30,.42) 76%,
+                rgba(255,90,20,.12) 84%, rgba(255,90,20,0) 100%);
+            /* No brillar sobre la cabina: se apaga justo debajo de su borde (--booth) */
+            -webkit-mask-image: linear-gradient(#000 calc(var(--booth, 70%) - 30px), transparent calc(var(--booth, 70%) + 50px));
+                    mask-image: linear-gradient(#000 calc(var(--booth, 70%) - 30px), transparent calc(var(--booth, 70%) + 50px));
+        }
+        @keyframes glowFlash { 0% { opacity: 0; } 40% { opacity: 1; } 100% { opacity: .45; } }
+        @keyframes glowBreathe { 0%, 100% { opacity: .45; } 50% { opacity: .7; } }
+        @media (prefers-reduced-motion: no-preference) {
+            .sun-glow { animation: glowBreathe 6s ease-in-out infinite; }
+            html.intro .sun-glow { animation: glowFlash 1.2s ease-out 1.1s backwards, glowBreathe 6s ease-in-out 2.3s infinite; }
+            html.beat-on .sun-glow { animation: none; }
         }
     </style>
     <script type="application/ld+json">
@@ -230,6 +258,32 @@
         </div>
     </aside>
     <div class="page-bg" style="background-image:url('img/bg-home.webp')"></div>
+    <div class="sun-glow" aria-hidden="true"></div>
+    <script>
+      // Ubica el disco del sol en pantalla. En la foto (1920x2560, background cover + center)
+      // el centro está en x 50 %, y 51 % y el radio es 49,7 % del ancho.
+      (function(){
+        var r=document.documentElement;
+        function place(){
+          var w=innerWidth, h=innerHeight, s=Math.max(w/1920, h/2560);
+          r.style.setProperty('--cx', w/2+'px');
+          r.style.setProperty('--cy', (h/2 + .01*2560*s)+'px');
+          r.style.setProperty('--r', (.497*1920*s)+'px');
+          r.style.setProperty('--booth', (h/2 + .12*2560*s)+'px'); // borde de la cabina: y 62 % de la foto
+        }
+        place(); addEventListener('resize', place);
+
+        // Pulso del fondo en cada beat (lo llama heroPulse). Más fuerte en el tiempo 1 del compás.
+        var calm=matchMedia('(prefers-reduced-motion: reduce)');
+        window.sunBeat=function(accent, ms){
+          if(calm.matches) return;
+          var bg=document.querySelector('.page-bg'), glow=document.querySelector('.sun-glow');
+          bg.animate([{transform:'scale('+(accent?1.035:1.014)+')'},{transform:'scale(1)'}],
+            {duration:ms*.9, easing:'cubic-bezier(.2,.8,.3,1)'});
+          glow.animate([{opacity:accent?1:.75},{opacity:.45}], {duration:ms, easing:'ease-out'});
+        };
+      })();
+    </script>
 
     <header class="flex flex-col items-center pt-8 px-6">
         <div class="flex items-center gap-6 mb-5">
@@ -357,6 +411,7 @@
               function beat(){
                 var accent=(beatCount % 4 === 0);
                 flash(accent ? ['beat','accent'] : ['beat']);
+                if(window.sunBeat) window.sunBeat(accent, beatMs);
                 if(accent) flash(['beat','accent']);
                 else if(beatCount % 2 === 1) flash(['beat']);
                 beatCount++;
@@ -403,6 +458,7 @@
           iPause.classList.toggle('hidden', !on);
           btn.setAttribute('aria-label', on ? 'Pausar último set' : 'Reproducir último set');
           if(eq) eq.classList.toggle('on', on);
+          document.documentElement.classList.toggle('beat-on', on);
           if(window.heroPulse) on ? window.heroPulse.start(BEAT_MS) : window.heroPulse.stop();
         }
 
