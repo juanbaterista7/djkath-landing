@@ -473,10 +473,20 @@
           api.onerror=function(){ var box=document.getElementById('scPlayer'); if(box) box.remove(); };
           document.head.appendChild(api);
         }
-        function whenIdle(){
-          setTimeout(function(){ (window.requestIdleCallback||setTimeout)(loadPlayer, {timeout:3000}); }, 1500);
+        // Autoplay: se intenta al cargar. Si el navegador bloquea el audio sin interacción,
+        // arranca con el primer clic, toque o tecla. Si la persona pausa, no se reanuda solo.
+        var userPaused=false, unlockEvents=['pointerdown','touchstart','keydown'];
+        function unlock(ev){
+          removeUnlock();
+          if(userPaused || playing || (ev && btn.contains(ev.target))) return;
+          if(ready) widget.play(); else { wantPlay=true; loadPlayer(); }
         }
-        if(document.readyState==='complete') whenIdle(); else window.addEventListener('load', whenIdle);
+        function removeUnlock(){
+          unlockEvents.forEach(function(t){ document.removeEventListener(t, unlock, true); });
+        }
+        unlockEvents.forEach(function(t){ document.addEventListener(t, unlock, {capture:true, passive:true}); });
+        wantPlay=true;
+        if(document.readyState==='complete') loadPlayer(); else window.addEventListener('load', loadPlayer);
 
         function bindWidget(){
           widget.bind(SC.Widget.Events.READY, function(){
@@ -502,7 +512,9 @@
         }
 
         btn.addEventListener('click', function(){
+          removeUnlock();
           if(!ready){ wantPlay=true; loadPlayer(); return; }
+          if(playing) userPaused=true;
           widget.toggle();
         });
         bar.addEventListener('click', function(ev){
