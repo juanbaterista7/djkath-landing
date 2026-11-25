@@ -275,10 +275,14 @@
 
         // Pulso del fondo en cada beat (lo llama heroPulse). Más fuerte en el tiempo 1 del compás.
         var calm=matchMedia('(prefers-reduced-motion: reduce)');
+        // No animar la foto mientras corre sunRise: en Chrome, un transform por WAAPI encima
+        // de esa animación deja la foto recortada (fondo negro) cuando el set suena desde el inicio.
+        var bgEl=document.querySelector('.page-bg'), bgReady=!r.classList.contains('intro');
+        bgEl.addEventListener('animationend', function(e){ if(e.animationName==='sunRise') bgReady=true; });
         window.sunBeat=function(accent, ms){
           if(calm.matches) return;
-          var bg=document.querySelector('.page-bg'), glow=document.querySelector('.sun-glow');
-          bg.animate([{transform:'scale('+(accent?1.035:1.014)+')'},{transform:'scale(1)'}],
+          var bg=bgEl, glow=document.querySelector('.sun-glow');
+          if(bgReady) bg.animate([{transform:'scale('+(accent?1.035:1.014)+')'},{transform:'scale(1)'}],
             {duration:ms*.9, easing:'cubic-bezier(.2,.8,.3,1)'});
           glow.animate([{opacity:accent?1:.75},{opacity:.45}], {duration:ms, easing:'ease-out'});
         };
